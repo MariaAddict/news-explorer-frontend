@@ -4,4 +4,4 @@
 
 
 _Доменное имя сервера:_
-(http://api.mortany-news.students.nomoreparties.xyz)
+[_Доменное имя сервера:_](http://api.mortany-news.students.nomoreparties.xyz "Привет, сервак")

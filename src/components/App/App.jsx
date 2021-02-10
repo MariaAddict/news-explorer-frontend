@@ -1,4 +1,3 @@
-import logo from '../../images/logo.svg';
 import './App.css';
 import { Route, Switch } from 'react-router-dom';
 import Header from '../Header/Header.jsx';
@@ -9,8 +8,8 @@ import SavedNews from '../SavedNews/SavedNews.jsx';
   function App() {
     return (
       <div className="App">
-        <div>
-          <Header />
+        <div className="page">
+          {/* <Header />
           <Switch>
             <Route exact path="/">
               <Main />
@@ -19,7 +18,8 @@ import SavedNews from '../SavedNews/SavedNews.jsx';
               <SavedNews />
             </Route>
           </Switch>
-          <Footer />
+          <Footer /> */}
+          <h1>Hello</h1>
         </div>
       </div>
     );

@@ -1,5 +1,5 @@
 @import url(./vendor/normalize.css);
-@import url(./vendor/fonts/fonts-backend/inter-regular.woff);
+@import url(./vendor/fonts/fonts-backend/roboto.css);
 
 body {
   margin: 0;

@@ -1,0 +1,44 @@
+.page {
+  min-width: 320px;
+  width: 100%;
+  height: 100%;
+  background-image: url(../../images/background-image.png);
+  background-repeat: no-repeat;
+  margin: 0 auto;
+  padding: 0;
+  font-family: "Roboto", "Arial", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
+  color: #ffffff;
+  text-align: start;
+}
+
+.main__line {
+  padding: 0;
+  margin: 0;
+  border-bottom: 3px solid rgba(196, 196, 196, 0.01);
+  box-shadow: inset 0px -1px 0px rgba(255, 255, 255, 0.2);
+}
+
+.main__title {
+  width: 608px;
+  font-family: Roboto Slab;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 60px;
+  line-height: 1.07;
+  margin: 80px auto 32px;
+  padding: 0;
+}
+
+.main__subtitle {
+  width: 608px;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 24px;
+  margin: 0 auto;
+  padding: 0;
+}

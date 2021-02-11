@@ -8,19 +8,20 @@ import SavedNews from '../SavedNews/SavedNews.jsx';
   function App() {
     return (
       <div className="App">
-        <div className="page">
-          {/* <Header />
+        {/* <div className="page"> */}
+          {/* <Header /> */}
           <Switch>
             <Route exact path="/">
               <Main />
             </Route>
             <Route path="/saved-news">
-              <SavedNews />
+            <h1>Saved news</h1>
+            {/* <SavedNews /> */}
             </Route>
           </Switch>
-          <Footer /> */}
-          <h1>Hello</h1>
-        </div>
+          {/* <Footer /> */}
+          
+        {/* </div> */}
       </div>
     );
   }

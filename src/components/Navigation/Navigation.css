@@ -1,0 +1,53 @@
+.navigation {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.navigation__link {
+  font-family: Roboto;
+  font-weight: 500;
+  font-size: 18px;
+  color: #fff; /* цвет меняется */
+  line-height: 1.33;
+  align-items: center;
+  text-align: center;
+  margin: 0;
+  text-decoration: none;
+  padding: 30px 0 26px;
+  margin-right: 32px;
+}
+
+.navigation__link:last-of-type {
+  margin-right: 0;
+}
+
+.navigation__link:hover {
+  opacity: 0.8;
+  transition: opacity 0.5s ease-in-out;
+  cursor: pointer;
+}
+
+.navigation__link_active{
+    border-bottom: 3px solid #fff;
+}
+
+.navigation__button {
+    max-width: 176px;
+    width: 100%;
+    max-height: 48px;
+    border-radius: 100px;
+    border: 1px solid #FFFFFF;
+    padding: 0;
+    background-color: inherit;
+    color: #FFFFFF;
+    margin-left: 32px;
+    margin-top: 19px;
+}
+
+@media screen and (max-width: 960px) {
+  .navigation__link {
+    font-size: 16px;
+    line-height: 24px;
+    margin-right: 16px;
+  }
+}

@@ -4,7 +4,7 @@ import SearchForm from '../SearchForm/SearchForm.jsx';
 
 function Main() {
     return (
-        <div className="page">
+        <div className="main">
             <Header />
             <hr className="main__line"></hr>
             <h2 className="main__title">Что творится в&nbsp;мире?</h2>

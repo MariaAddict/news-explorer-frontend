@@ -8,7 +8,7 @@ function Navigation() {
           Главная
         </NavLink>
         <NavLink to="/saved-news" className="navigation__link" activeClassName="navigation__link_active" >
-          Сохранённые статьи
+          Сохранённые&nbsp;статьи
         </NavLink>
         <button type="button" className="navigation__button">Авторизоваться</button>
     </nav>

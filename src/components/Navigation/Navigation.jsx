@@ -1,7 +1,13 @@
 import "./Navigation.css";
 import { NavLink } from "react-router-dom";
 
-function Navigation({ isClick, mainTheme }) {
+function Navigation({ isClick, mainTheme, onClickAuth, closeBurger }) {
+
+  function onClick() {
+    onClickAuth();
+    closeBurger();
+  }
+
   return (
     <nav
       className={
@@ -40,6 +46,7 @@ function Navigation({ isClick, mainTheme }) {
             ? "navigation__button_theme_main"
             : "navigation__button_theme_save-news"
         } ${isClick ? "navigation__button_theme_burger" : ""} `}
+        onClick={onClick}
       >
         Авторизоваться
       </button>

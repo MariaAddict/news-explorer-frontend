@@ -45,6 +45,7 @@
   color: #ffffff;
 }
 
+
 .header__title {
   font-family: "Roboto Slab";
   font-size: 20px;
@@ -113,6 +114,10 @@
     line-height: 24px;
     padding: 16px 0 16px;
   }
+  
+  .header__title_hidden {
+    color: transparent;
+  }
 
   .header__line {
     display: block;
@@ -121,6 +126,10 @@
   }
 
   .header__burger {
-    display: inline-block;;
+    display: inline-block;
+  }
+
+  .header__burger_hidden {
+    display: none;
   }
 }

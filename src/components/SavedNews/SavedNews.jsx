@@ -3,11 +3,11 @@ import Header from "../Header/Header.jsx";
 import SavedNewsHeader from "../SavedNewsHeader/SavedNewsHeader.jsx";
 import NewsCardList from "../NewsCardList/NewsCardList.jsx";
 
-function SavedNews({mainTheme}) {
+function SavedNews({mainTheme, onClickAuth}) {
   return (
     <section>
       <div className="save-news">
-        <Header mainTheme = {mainTheme}/>
+        <Header mainTheme = {mainTheme} onClickAuth={onClickAuth} />
         <hr className="main__line"></hr>
         <SavedNewsHeader />
       </div>

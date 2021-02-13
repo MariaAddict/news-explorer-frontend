@@ -15,8 +15,8 @@ function Main() {
             <p className="main__subtitle">Находите самые свежие статьи на&nbsp;любую тему и&nbsp;сохраняйте в&nbsp;своём личном кабинете.</p>
             <SearchForm />
         </div>
-        {/* <NewsCardList /> */}
-        <Preloader />
+        <NewsCardList />
+        {/* <Preloader /> */}
         <About />
         </div>  
     );

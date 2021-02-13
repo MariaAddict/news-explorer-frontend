@@ -24,6 +24,7 @@
   line-height: 22px;
   color: #1a1b22;
   padding-left: 24px;
+  padding-right: 165px;
 }
 
 .seach-form__button {
@@ -51,11 +52,18 @@
 @media screen and (max-width: 960px) {
     .seach-form__input {
         max-width: 448px;
+        padding-right: 155px;
     }
 
     .seach-form__button {
         max-width: 160px;
         margin-left: calc(-25%);
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .seach-form__input {
+        padding-right: 150px;
     }
 }
 
@@ -69,6 +77,7 @@
         max-width: 288px;
         min-height: 56px;
         margin-bottom: 16px;
+        padding-right: 0;
     }
 
     .seach-form__button {

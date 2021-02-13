@@ -1,5 +1,5 @@
 import './SearchForm.css';
-import {useState} from 'react';
+import { useState } from 'react';
 
 function SearchForm() {
     const [word, setWord] = useState('');

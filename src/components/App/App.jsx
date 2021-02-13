@@ -8,7 +8,6 @@ import SavedNews from '../SavedNews/SavedNews.jsx';
   function App() {
     return (
       <div className="App">
-        {/* <div className="page"> */}
           {/* <Header /> */}
           <Switch>
             <Route exact path="/">
@@ -19,9 +18,7 @@ import SavedNews from '../SavedNews/SavedNews.jsx';
             {/* <SavedNews /> */}
             </Route>
           </Switch>
-          {/* <Footer /> */}
-          
-        {/* </div> */}
+          <Footer />
       </div>
     );
   }

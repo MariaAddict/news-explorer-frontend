@@ -3,11 +3,11 @@ import Header from "../Header/Header.jsx";
 import SavedNewsHeader from "../SavedNewsHeader/SavedNewsHeader.jsx";
 import NewsCardList from "../NewsCardList/NewsCardList.jsx";
 
-function SavedNews() {
+function SavedNews({mainTheme}) {
   return (
     <section>
       <div className="save-news">
-        <Header />
+        <Header mainTheme = {mainTheme}/>
         <hr className="main__line"></hr>
         <SavedNewsHeader />
       </div>

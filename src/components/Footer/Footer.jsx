@@ -13,12 +13,17 @@ const Footer = () => {
         <nav>
           <ul className="footer__links">
             <li className="footer__list">
-              <Link to="/" className="footer__link" >
+              <Link to="/" className="footer__link">
                 Главная
               </Link>
             </li>
             <li className="footer__list">
-              <a href="https://praktikum.yandex.ru/" className="footer__link">
+              <a
+                href="https://praktikum.yandex.ru/"
+                className="footer__link"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 Яндекс.Практикум
               </a>
             </li>
@@ -27,7 +32,12 @@ const Footer = () => {
         <nav>
           <ul className="footer__icons">
             <li className="footer__list">
-              <a href="https://www.facebook.com/" className="footer__link">
+              <a
+                href="https://www.facebook.com/"
+                className="footer__link"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 <img
                   src={iconFacebook}
                   alt="Facebook"
@@ -38,6 +48,8 @@ const Footer = () => {
             <li className="footer__list">
               <a
                 href="https://github.com/MariaAddict/"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="footer__icon"
               >
                 <img

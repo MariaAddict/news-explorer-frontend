@@ -15,7 +15,7 @@ function App() {
   const [isRegisterModalOpen, setIsRegisterModalOpen] = useState(false);
   const [infoTooltipOpen, setInfoTooltipOpen] = useState(false);
 
-  
+
   useEffect(() => {
     if (location.pathname === "/") {
       console.log("MAIN ", location.pathname);
@@ -49,16 +49,33 @@ function App() {
     <div className="App">
       <Switch>
         <Route exact path="/">
-          <Main mainTheme={mainTheme} onClickAuth = {handleLoginClick} isLoginModalOpen={isLoginModalOpen} isRegisterModalOpen={isRegisterModalOpen} />
+          <Main
+            mainTheme={mainTheme}
+            onClickAuth={handleLoginClick}
+            isLoginModalOpen={isLoginModalOpen}
+            isRegisterModalOpen={isRegisterModalOpen}
+          />
         </Route>
         <Route path="/saved-news">
-          <SavedNews mainTheme={mainTheme} onClickAuth = {handleLoginClick} />
+          <SavedNews mainTheme={mainTheme} onClickAuth={handleLoginClick} />
         </Route>
       </Switch>
       <Footer />
-      <LoginModal isOpen={isLoginModalOpen} onClose={closeAllPopups} openRegistrationModal={handleRegistrationClick} />
-      <RegisterModal isOpen={isRegisterModalOpen} onClose={closeAllPopups} openLoginModal={handleLoginClick} />
-      <InfoTooltip isOpen={infoTooltipOpen} onClose={closeAllPopups} openLoginModal={handleLoginClick}/>
+      <LoginModal
+        isOpen={isLoginModalOpen}
+        onClose={closeAllPopups}
+        openRegistrationModal={handleRegistrationClick}
+      />
+      <RegisterModal
+        isOpen={isRegisterModalOpen}
+        onClose={closeAllPopups}
+        openLoginModal={handleLoginClick}
+      />
+      <InfoTooltip
+        isOpen={infoTooltipOpen}
+        onClose={closeAllPopups}
+        openLoginModal={handleLoginClick}
+      />
     </div>
   );
 }

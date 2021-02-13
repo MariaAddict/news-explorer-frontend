@@ -3,6 +3,7 @@ import Header from '../Header/Header.jsx';
 import SearchForm from '../SearchForm/SearchForm.jsx';
 import About from '../About/About.jsx';
 import NewsCardList from '../NewsCardList/NewsCardList.jsx';
+import Preloader from '../Preloader/Preloader.jsx';
 
 function Main() {
     return (
@@ -14,7 +15,8 @@ function Main() {
             <p className="main__subtitle">Находите самые свежие статьи на&nbsp;любую тему и&nbsp;сохраняйте в&nbsp;своём личном кабинете.</p>
             <SearchForm />
         </div>
-        <NewsCardList />
+        {/* <NewsCardList /> */}
+        <Preloader />
         <About />
         </div>  
     );

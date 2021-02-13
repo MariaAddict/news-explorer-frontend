@@ -5,6 +5,7 @@ import Main from "../Main/Main.jsx";
 import SavedNews from "../SavedNews/SavedNews.jsx";
 import LoginModal from "../LoginModal/LoginModal.jsx";
 import RegisterModal from "../RegisterModal/RegisterModal.jsx";
+import InfoTooltip from "../InfoTooltip/InfoTooltip.jsx";
 import { useEffect, useState } from "react";
 
 function App() {
@@ -12,6 +13,9 @@ function App() {
   const [mainTheme, setMainTheme] = useState(true);
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
   const [isRegisterModalOpen, setIsRegisterModalOpen] = useState(false);
+  const [infoTooltipOpen, setInfoTooltipOpen] = useState(false);
+
+  
   useEffect(() => {
     if (location.pathname === "/") {
       console.log("MAIN ", location.pathname);
@@ -31,9 +35,14 @@ function App() {
     setIsRegisterModalOpen(true);
   }
 
+  function handleInfoTooltipClick() {
+    setInfoTooltipOpen(true);
+  }
+
   function closeAllPopups() {
     setIsLoginModalOpen(false);
     setIsRegisterModalOpen(false);
+    setInfoTooltipOpen(false);
   }
 
   return (
@@ -49,6 +58,7 @@ function App() {
       <Footer />
       <LoginModal isOpen={isLoginModalOpen} onClose={closeAllPopups} openRegistrationModal={handleRegistrationClick} />
       <RegisterModal isOpen={isRegisterModalOpen} onClose={closeAllPopups} openLoginModal={handleLoginClick} />
+      <InfoTooltip isOpen={infoTooltipOpen} onClose={closeAllPopups} openLoginModal={handleLoginClick}/>
     </div>
   );
 }

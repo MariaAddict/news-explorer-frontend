@@ -73,7 +73,6 @@
 .cards__button-save {
   min-height: 40px;
   min-width: 40px;
-  background-image: url(../../images/save-button.png);
   background-size: 14px 19px;
   background-position: 50%;
   background-repeat: no-repeat;
@@ -87,8 +86,21 @@
   right: 24px;
 }
 
-.cards__button-save:hover {
+.cards__button-save_theme_main {
+  background-image: url(../../images/save-button.png);
+}
+
+.cards__button-save_theme_save-news {
+  background-image: url(../../images/trash.png);
+}
+
+.cards__button-save_theme_main:hover {
   background-image: url(../../images/save-button-hover.svg);
+  transition: background-image 0.6s ease;
+}
+
+.cards__button-save_theme_save-news:hover {
+  background-image: url(../../images/trash-presed.png);
   transition: background-image 0.6s ease;
 }
 

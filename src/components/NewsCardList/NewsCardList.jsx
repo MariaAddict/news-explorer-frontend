@@ -39,16 +39,16 @@ const cards = [
 ];
 //
 
-function NewsCardList() {
+function NewsCardList({mainTheme}) {
   return (
-    <section className="card-list">
-      <h3 className="card-list__title">Результаты поиска</h3>
+    <section className={`card-list ${mainTheme ? "card-list_theme_main" : "card-list_theme_save-news"}`}>
+      {mainTheme && (<h3 className="card-list__title">Результаты поиска</h3>)}
       <ul className="cards">
         {cards.map((card) => (
-          <NewsCard card={card} />
+          <NewsCard card={card} mainTheme = {mainTheme}/>
         ))}
       </ul>
-      <button type="button" className="card-list__button">Показать еще</button>
+      {mainTheme && (<button type="button" className="card-list__button">Показать еще</button>)}
     </section>
   );
 }

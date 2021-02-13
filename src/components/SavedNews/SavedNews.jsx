@@ -11,7 +11,7 @@ function SavedNews({mainTheme}) {
         <hr className="main__line"></hr>
         <SavedNewsHeader />
       </div>
-      <NewsCardList />
+      <NewsCardList mainTheme = {mainTheme} />
     </section>
   );
 }

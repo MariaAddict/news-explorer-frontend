@@ -15,7 +15,7 @@ function Main( {mainTheme} ) {
             <p className="main__subtitle">Находите самые свежие статьи на&nbsp;любую тему и&nbsp;сохраняйте в&nbsp;своём личном кабинете.</p>
             <SearchForm />
         </div>
-        <NewsCardList />
+        <NewsCardList mainTheme = {mainTheme} />
         {/* <Preloader /> */}
         <About />
         </div>  

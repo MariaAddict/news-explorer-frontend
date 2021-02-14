@@ -68,14 +68,16 @@
   margin: 0 0 18px;
   padding: 0;
   text-overflow: ellipsis;
-  overflow: hidden;
+  
   display: -webkit-box;
   -webkit-line-clamp: 5;
   -webkit-box-orient: vertical; 
+  overflow-y: hidden;
+  word-wrap: break-word;
   height: 110px;
   box-sizing: border-box; 
 }
-
+  
 .cards__source {
   font-family: "Roboto Slab", "Arial", sans-serif;
   font-weight: bold;

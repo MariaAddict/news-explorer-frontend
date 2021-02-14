@@ -56,6 +56,12 @@
   line-height: 22px;
   margin: 0 0 18px;
   padding: 0;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 5;
+  -webkit-box-orient: vertical; 
+  height: 110px;
 }
 
 .cards__source {
@@ -156,6 +162,9 @@
   .cards__title {
     font-size: 22px;
     line-height: 24px;
+  }
+  .cards__text {
+    height: 88px;
   }
 }
 

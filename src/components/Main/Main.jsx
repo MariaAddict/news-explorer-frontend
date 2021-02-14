@@ -7,7 +7,7 @@ import Preloader from '../Preloader/Preloader.jsx';
 
 function Main( {mainTheme, onClickAuth, isLoginModalOpen, isRegisterModalOpen} ) {
     return (
-        <div>
+        <main>
         <div className="main">
             <Header mainTheme = {mainTheme} onClickAuth = {onClickAuth} isLoginModalOpen={isLoginModalOpen} isRegisterModalOpen={isRegisterModalOpen} />
             <hr className="main__line"></hr>
@@ -18,7 +18,7 @@ function Main( {mainTheme, onClickAuth, isLoginModalOpen, isRegisterModalOpen} )
         <NewsCardList mainTheme = {mainTheme}  />
         {/* <Preloader /> */}
         <About />
-        </div>  
+        </main>  
     );
 }
 

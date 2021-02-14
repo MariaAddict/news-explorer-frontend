@@ -27,6 +27,13 @@
   padding-right: 165px;
 }
 
+.seach-form__input:focus {
+  outline-color: #2a65cc;
+  border: 1px solid #2a65cc;
+  border-radius: 100px;
+  box-shadow: 1px 1px 1px 0 #2a65cc;
+}
+
 .seach-form__button {
   max-width: 168px;
   width: 100%;
@@ -40,49 +47,49 @@
 }
 
 .seach-form__button:hover {
-    background-color: #347EFF;
-    transition: background-color 0.5s ease-in-out;
-    cursor: pointer;
+  background-color: #347eff;
+  transition: background-color 0.5s ease-in-out;
+  cursor: pointer;
 }
 
 .seach-form__button:active {
-    background-color: #2A65CC;
+  background-color: #2a65cc;
 }
 
 @media screen and (max-width: 960px) {
-    .seach-form__input {
-        max-width: 448px;
-        padding-right: 155px;
-    }
+  .seach-form__input {
+    max-width: 448px;
+    padding-right: 155px;
+  }
 
-    .seach-form__button {
-        max-width: 160px;
-        margin-left: calc(-25%);
-    }
+  .seach-form__button {
+    max-width: 160px;
+    margin-left: calc(-25%);
+  }
 }
 
 @media screen and (max-width: 600px) {
-    .seach-form__input {
-        padding-right: 150px;
-    }
+  .seach-form__input {
+    padding-right: 150px;
+  }
 }
 
 @media screen and (max-width: 480px) {
-    .seach-form {
-        flex-direction: column;
-        align-items: center;
-    }
+  .seach-form {
+    flex-direction: column;
+    align-items: center;
+  }
 
-    .seach-form__input {
-        max-width: 288px;
-        min-height: 56px;
-        margin-bottom: 16px;
-        padding-right: 0;
-    }
+  .seach-form__input {
+    max-width: 288px;
+    min-height: 56px;
+    margin-bottom: 16px;
+    padding-right: 0;
+  }
 
-    .seach-form__button {
-        max-width: 288px;
-        min-height: 56px;
-        margin-left: 0;
-    }
+  .seach-form__button {
+    max-width: 288px;
+    min-height: 56px;
+    margin-left: 0;
+  }
 }

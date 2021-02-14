@@ -14,7 +14,7 @@ function SearchForm() {
 
     return (
         <div className="seach-form">
-            <input type="text" name="seach-word" className="seach-form__input" placeholder="Введите тему новости" onChange={handleChange}></input>
+            <input type="text" name="seach-word" className="seach-form__input" placeholder="Введите тему новости" onChange={handleChange} required ></input>
             <button type="submit" className="seach-form__button" onChange={handleSubmit}>Искать</button>
         </div>
     );

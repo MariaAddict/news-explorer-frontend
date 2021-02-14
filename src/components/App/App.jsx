@@ -18,11 +18,9 @@ function App() {
 
   useEffect(() => {
     if (location.pathname === "/") {
-      console.log("MAIN ", location.pathname);
       setMainTheme(true);
     }
     if (location.pathname === "/saved-news") {
-      console.log("SAVEEE ", location.pathname);
       setMainTheme(false);
     }
   }, [location]);
@@ -44,6 +42,24 @@ function App() {
     setIsRegisterModalOpen(false);
     setInfoTooltipOpen(false);
   }
+
+  // // /валидация и объект классов 
+  //   const validationConfig = {
+  //       formSelector: '.modal__form',
+  //       inputSelector: '.modal__item',
+  //       submitButtonSelector: '.modal__save-button',
+  //       inactiveButtonClass: 'modal__save-button_disabled',
+  //       inputErrorClass: 'modal__item_type_error',
+  //       errorClass: 'modal__error_visible',
+  //   };
+
+  //   const formEditProfileForValidation = new FormValidator(validationConfig, formEditProfile);
+  //   formEditProfileForValidation.enableValidation();
+  //   const formAddCardForValidation = new FormValidator(validationConfig, formAddCard);
+  //   formAddCardForValidation.enableValidation();
+  //   const formAvatarForValidation = new FormValidator(validationConfig, formAvatar);
+  //   formAvatarForValidation.enableValidation();
+  //   //
 
   return (
     <div className="App">

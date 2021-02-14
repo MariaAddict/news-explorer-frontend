@@ -11,7 +11,7 @@
 }
 
 .card-list_theme_save-news {
-  padding: 0 102px;
+  padding: 1px 102px;
 }
 
 .card-list__title {
@@ -62,8 +62,7 @@
   }
 
   .card-list_theme_save-news {
-    padding: 0;
-    padding-right: 24px;
+    padding: 1px 24px 10px 40px;
   }
 
   .card-list__title {
@@ -73,6 +72,7 @@
 
   .cards {
     gap: 8px 8px;
+    margin: 32px 0 20px;
   }
 }
 
@@ -82,11 +82,12 @@
   }
 
   .card-list_theme_save-news {
-    padding: 0 16px;
+    padding: 1px 16px;
   }
 
   .cards {
     gap: 10px 0;
     grid-template-columns: 1fr;
+    margin: 24px 0 15px;
   }
 }

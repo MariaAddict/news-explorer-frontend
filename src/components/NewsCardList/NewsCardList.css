@@ -76,6 +76,12 @@
   }
 }
 
+@media screen and (max-width: 720px) {
+  .cards {
+    grid-template-columns: repeat(2, 1fr);;
+  }
+}
+
 @media screen and (max-width: 480px) {
   .card-list_theme_main {
     padding: 32px 16px;

@@ -17,9 +17,11 @@ function NewsCard({ card, mainTheme}) {
           className="cards__image"
         />
         <div className="cards__description">
+          <div className="cards__description-no-source">
           <p className="cards__date">{card.date}</p>
           <h4 className="cards__title">{card.title}</h4>
           <p className="cards__text">{card.text}</p>
+          </div>
           <p className="cards__source">{card.source}</p>
         </div>
         <button

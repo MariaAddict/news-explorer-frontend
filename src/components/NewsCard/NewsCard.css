@@ -1,6 +1,7 @@
 .cards__item {
   max-width: 400px;
   width: 100%;
+  /* height: 400px; */
   background-color: #fff;
   border-radius: 10px;
   margin: 0;
@@ -9,11 +10,15 @@
   position: relative;
   box-sizing: border-box;
   text-align: start;
+  padding-bottom: 24px;
 }
 
 .cards__link {
   text-decoration: none;
   color: #1a1b22;
+  box-sizing: border-box;
+  height: 100%;
+  /* display: flex; */
 }
 
 .cards__image {
@@ -25,7 +30,17 @@
 }
 
 .cards__description {
-  margin: 20px 24px 24px;
+  margin: 20px 24px 0; 
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 330px;
+  box-sizing: border-box; 
+}
+
+.cards__description-no-source {
+  box-sizing: border-box; 
+  height: 268px;
 }
 
 .cards__title {
@@ -35,6 +50,7 @@
   line-height: 30px;
   padding: 0;
   margin: 0 0 16px;
+  box-sizing: border-box; 
 }
 
 .cards__date {
@@ -47,6 +63,7 @@
   color: #b6bcbf;
   margin: 0 0 12px;
   padding: 0;
+  box-sizing: border-box; 
 }
 
 .cards__text {
@@ -62,10 +79,11 @@
   -webkit-line-clamp: 5;
   -webkit-box-orient: vertical; 
   height: 110px;
+  box-sizing: border-box; 
 }
 
 .cards__source {
-  font-family: Roboto Slab;
+  font-family: "Roboto Slab";
   font-weight: bold;
   font-size: 16px;
   line-height: 1.25;
@@ -168,7 +186,7 @@
   }
 }
 
-@media screen and (max-width: 480px) {
+@media screen and (max-width: 600px) {
     .cards__title {
       font-size: 22px;
       line-height: 26px;

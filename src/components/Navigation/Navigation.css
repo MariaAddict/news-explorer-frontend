@@ -1,0 +1,135 @@
+.navigation_type_desktop {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.navigation_type_mobile {
+  display: none;
+}
+
+.navigation__link {
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 1.33;
+  align-items: center;
+  text-align: center;
+  margin: 0;
+  text-decoration: none;
+  padding: 30px 0 26px;
+  margin-right: 32px;
+}
+
+.navigation__link_theme_main {
+  color: #fff;
+}
+
+.navigation__link_theme_save-news {
+  color: #1A1B22;
+}
+
+.navigation__link_theme_burger {
+  color: #fff;
+}
+
+.navigation__link:last-of-type {
+  margin-right: 0;
+}
+
+.navigation__link:hover {
+  opacity: 0.8;
+  transition: opacity 0.5s ease-out;
+  cursor: pointer;
+}
+
+.navigation__link_active-main {
+  border-bottom: 3px solid #fff;
+}
+
+.navigation__link_active-save-news {
+  border-bottom: 3px solid #1A1B22;;
+}
+
+.navigation__button {
+  max-width: 176px;
+  width: 100%;
+  max-height: 48px;
+  border-radius: 100px;
+  padding: 0;
+  background-color: inherit;
+  color: #ffffff;
+  font-size: 18px;
+  line-height: 24px;
+  font-weight: 500;
+  margin-left: 32px;
+  margin-top: 19px;
+}
+
+.navigation__button_theme_main {
+  color: #ffffff;
+  border: 1px solid #ffffff;
+}
+
+.navigation__button_theme_save-news {
+  color: #1A1B22;
+  border: 1px solid #D1D2D6;
+}
+
+.navigation__button_theme_burger {
+  color: #ffffff;
+  border: 1px solid #ffffff;
+}
+
+.navigation__button:hover {
+  opacity: 0.8;
+  transition: opacity 0.5s ease-in-out;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 960px) {
+  .navigation__link {
+    font-size: 16px;
+    line-height: 24px;
+    margin-right: 16px;
+  }
+
+  .navigation__button {
+    font-size: 16px;
+    line-height: 24px;
+    max-width: 152px;
+    min-width: 40px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .navigation_type_desktop {
+    display: none;
+  }
+
+  .navigation_type_mobile {
+    background-color: #1a1b22;
+    width: 100%;
+    height: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+
+  .navigation__link {
+    margin-right: 0;
+    text-align: start;
+    margin: 16px 0 0;
+    padding: 0;
+    font-size: 18px;
+    line-height: 56px;
+  }
+
+  .navigation__link:last-of-type {
+    margin-top: 0;
+  }
+
+  .navigation__button {
+    max-width: 288px;
+    min-height: 56px;
+    margin: 22px 0 24px;
+  }
+}

@@ -1,5 +1,5 @@
 import "./NewsCard.css";
-import React, { useState, useEffect, createRef } from "react";
+import React, { useState } from "react";
 
 function NewsCard({ card, mainTheme }) {
   const [saveIsClick, setSaveIsClick] = useState(false);

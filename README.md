@@ -5,6 +5,6 @@ ____________________________________________________________
 
 _Проект представляет собой страницу с поисками статей и возможностью сохранения понравившихся статей авториированному пользователю_
 
-[Посмотреть проект](http://mortany-news.students.nomoreparties.xyz/ "Добро пожаловать на news-explorer")
+[Посмотреть проект](https://mort-news-exp.students.nomoreparties.space/ "Добро пожаловать на news-explorer")
 
-[Доменное имя сервера](https://api.mortany-news.students.nomoreparties.xyz/ "Привет, сервак")  
+[Доменное имя сервера](https://api.mort-news-exp.students.nomoreparties.space/ "Привет, сервак")  

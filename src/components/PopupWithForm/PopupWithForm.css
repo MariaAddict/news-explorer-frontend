@@ -93,9 +93,9 @@
   font-size: 14px;
   line-height: 17px;
   background-color: transparent;
-  margin-bottom: 30px;
   border: 0;
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  margin-bottom: 3px;
 }
 
 .modal__input:focus {
@@ -105,14 +105,18 @@
 }
 
 .modal__error {
-  padding-bottom: 25px;
+  box-sizing: border-box;
+  display: block;
+  margin-bottom: 27px;
 }
 
 .modal__error_visible {
   font-family: "Inter", "Arial", sans-serif;
   font-size: 12px;
   line-height: 15px;
+  text-align: start;
   color: #ff0000;
+  margin-bottom: 13px;
 }
 
 .modal__save-button {

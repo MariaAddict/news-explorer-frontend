@@ -1,7 +1,7 @@
 import './SearchForm.css';
 import { useState, useCallback, useRef } from 'react';
 
-function SearchForm() {
+function SearchForm({onSubmit}) {
     const [word, setWord] = useState('');
     const [errors, setErrors] = useState({});
     const [isValid, setIsValid] = useState(false);
@@ -9,6 +9,7 @@ function SearchForm() {
 
     function handleChange(e) {
         setWord(e.target.value);
+        setIsValid(e.target.closest(".seach-form").checkValidity());
     }
 
     const resetFormWithoutWord = useCallback(
@@ -23,6 +24,9 @@ function SearchForm() {
         e.preventDefault();
         setIsValid(e.target.closest(".seach-form").checkValidity());
         setErrors({ ...errors, [inputRef.current.name]: inputRef.current.validationMessage });
+        if (isValid) {
+            onSubmit(word);
+        }
         // resetFormWithoutWord();
     }
 

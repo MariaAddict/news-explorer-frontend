@@ -4,8 +4,9 @@ import SearchForm from '../SearchForm/SearchForm.jsx';
 import About from '../About/About.jsx';
 import NewsCardList from '../NewsCardList/NewsCardList.jsx';
 import Preloader from '../Preloader/Preloader.jsx';
+import NotFoundArticles from '../NotFoundArticles/NotFoundArticles.jsx';
 
-function Main( {mainTheme, onClickAuth, isLoginModalOpen, isRegisterModalOpen, submitSearchForm, articles} ) {
+function Main( {mainTheme, onClickAuth, isLoginModalOpen, isRegisterModalOpen, submitSearchForm, articles, loader, isNewsCardList, isNotFoundArticles} ) {
     return (
         <main>
         <div className="main">
@@ -15,8 +16,9 @@ function Main( {mainTheme, onClickAuth, isLoginModalOpen, isRegisterModalOpen, s
             <p className="main__subtitle">Находите самые свежие статьи на&nbsp;любую тему и&nbsp;сохраняйте в&nbsp;своём личном кабинете.</p>
             <SearchForm onSubmit={submitSearchForm} />
         </div>
-        <NewsCardList mainTheme = {mainTheme} articles={articles}  />
-        {/* <Preloader /> */}
+        {isNewsCardList && <NewsCardList mainTheme = {mainTheme} articles={articles}  />}
+        {loader && <Preloader />}
+        {isNotFoundArticles && <NotFoundArticles />}
         <About />
         </main>  
     );

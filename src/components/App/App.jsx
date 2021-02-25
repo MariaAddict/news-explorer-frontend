@@ -16,6 +16,9 @@ function App() {
   const [isRegisterModalOpen, setIsRegisterModalOpen] = useState(false);
   const [infoTooltipOpen, setInfoTooltipOpen] = useState(false);
   const [articles, setArticles] = useState([]);
+  const [isNewsCardList, setIsNewsCardList] = useState(false);
+  const [loader, setLoader] = useState(false);
+  const [isNotFoundArticles, setIsNotFoundArticles] = useState(false);
 
 
   useEffect(() => {
@@ -46,11 +49,22 @@ function App() {
   }
 
   function submitSearchForm(word) {
+    setIsNewsCardList(false);
+    setIsNotFoundArticles(false);
+    setLoader(true);
     apiNews.getNews(word).then(data => {
-      setArticles(data.articles);
+      console.log(data);
+      if (data.totalResults === 0) {
+        setIsNotFoundArticles(true);
+      } else {
+        setIsNewsCardList(true);
+        setArticles(data.articles);
+      }
     }
     ).catch(err => {
       console.log(err);
+  }).finally(() => {
+    setLoader(false);
   });
   }
 
@@ -65,6 +79,9 @@ function App() {
             isRegisterModalOpen={isRegisterModalOpen}
             submitSearchForm = {submitSearchForm}
             articles={articles}
+            loader= {loader}
+            isNewsCardList= {isNewsCardList}
+            isNotFoundArticles= {isNotFoundArticles}
           />
         </Route>
         <Route path="/saved-news">

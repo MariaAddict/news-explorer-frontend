@@ -17,8 +17,7 @@ function Navigation({ isClick, mainTheme, onClickAuth, closeBurger }) {
       }
     >
       <NavLink
-        path
-        to="/"
+        exact to="/"
         className={`navigation__link ${
           mainTheme
             ? "navigation__link_theme_main"

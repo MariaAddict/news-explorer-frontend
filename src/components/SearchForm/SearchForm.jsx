@@ -1,15 +1,14 @@
 import './SearchForm.css';
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useRef } from 'react';
 
 function SearchForm() {
     const [word, setWord] = useState('');
     const [errors, setErrors] = useState({});
     const [isValid, setIsValid] = useState(false);
+    const inputRef = useRef();
 
     function handleChange(e) {
         setWord(e.target.value);
-        setErrors({ ...errors, [e.target.name]: e.target.validationMessage });
-        setIsValid(e.target.closest(".seach-form").checkValidity());
     }
 
     const resetFormWithoutWord = useCallback(
@@ -22,15 +21,17 @@ function SearchForm() {
 
     function handleSubmit(e) {
         e.preventDefault();
-        resetFormWithoutWord();
+        setIsValid(e.target.closest(".seach-form").checkValidity());
+        setErrors({ ...errors, [inputRef.current.name]: inputRef.current.validationMessage });
+        // resetFormWithoutWord();
     }
 
     return (
         <form className="seach-form" action="#" name="seach-form" onSubmit={handleSubmit} noValidate>
-            <input type="text" value={word} name="search" className="seach-form__input" placeholder="Введите тему новости"
+            <input type="text" ref={inputRef} value={word} name="search" className="seach-form__input" placeholder="Введите тему новости"
              onChange={handleChange} minLength="1" required ></input>
-            <button type="submit" className="seach-form__button" onChange={handleSubmit} disabled={!isValid}>Искать</button>
-            <span className={`seach-form__error ${!errors.search ? "" : "seach-form__error_visible"}`}>{errors.search}</span>
+            <button type="submit" className="seach-form__button" onChange={handleSubmit}>Искать</button>
+            <span className={`seach-form__error ${(!errors.search && isValid) ? "" : "seach-form__error_visible"}`}>{errors.search ? "Нужно ввести ключевое слово" : ""}</span>
         </form>
     );
 }

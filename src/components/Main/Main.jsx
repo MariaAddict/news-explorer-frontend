@@ -5,7 +5,7 @@ import About from '../About/About.jsx';
 import NewsCardList from '../NewsCardList/NewsCardList.jsx';
 import Preloader from '../Preloader/Preloader.jsx';
 
-function Main( {mainTheme, onClickAuth, isLoginModalOpen, isRegisterModalOpen, submitSearchForm} ) {
+function Main( {mainTheme, onClickAuth, isLoginModalOpen, isRegisterModalOpen, submitSearchForm, articles} ) {
     return (
         <main>
         <div className="main">
@@ -15,7 +15,7 @@ function Main( {mainTheme, onClickAuth, isLoginModalOpen, isRegisterModalOpen, s
             <p className="main__subtitle">Находите самые свежие статьи на&nbsp;любую тему и&nbsp;сохраняйте в&nbsp;своём личном кабинете.</p>
             <SearchForm onSubmit={submitSearchForm} />
         </div>
-        <NewsCardList mainTheme = {mainTheme}  />
+        <NewsCardList mainTheme = {mainTheme} articles={articles}  />
         {/* <Preloader /> */}
         <About />
         </main>  

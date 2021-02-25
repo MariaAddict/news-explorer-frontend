@@ -15,8 +15,9 @@ function App() {
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
   const [isRegisterModalOpen, setIsRegisterModalOpen] = useState(false);
   const [infoTooltipOpen, setInfoTooltipOpen] = useState(false);
+  const [articles, setArticles] = useState([]);
 
-  
+
   useEffect(() => {
     if (location.pathname === "/") {
       setMainTheme(true);
@@ -46,7 +47,7 @@ function App() {
 
   function submitSearchForm(word) {
     apiNews.getNews(word).then(data => {
-      console.log('news data: ', data);
+      setArticles(data.articles);
     }
     ).catch(err => {
       console.log(err);
@@ -63,6 +64,7 @@ function App() {
             isLoginModalOpen={isLoginModalOpen}
             isRegisterModalOpen={isRegisterModalOpen}
             submitSearchForm = {submitSearchForm}
+            articles={articles}
           />
         </Route>
         <Route path="/saved-news">

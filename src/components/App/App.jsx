@@ -23,9 +23,19 @@ function App() {
   const [numberOfArticles, setNumberOfArticles] = useState(3);
   const [errorApiNews, setErrorApiNews] = useState(false);
   const [registrationError, setRegistrationError] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(false);
   const [currentUser, setCurrentUser] = useState({ email: '', name: '', _id: '' });
 
 
+//   useEffect(() => {
+//     if (loggedIn) {
+//       apiMain.getUserInfo().then((dataUser) => {
+//         setCurrentUser(dataUser);
+//     }).catch(err => {
+//         console.log(err);
+//     });
+// }
+// }, [loggedIn]);
   useEffect(() => {
     if (location.pathname === "/") {
       setMainTheme(true);
@@ -93,6 +103,18 @@ function App() {
   });
   }
 
+  function onLogin(email, password) {
+    apiMain.authorization(email, password).then((user) => {
+      if (user.token) {
+        localStorage.setItem('jwt', user.token);
+        setLoggedIn(true);
+        setIsLoginModalOpen(false);
+    }
+    }).catch(err => {
+      console.log(err);
+  });
+  }
+
   return (
     <div className="App">
       <Switch>
@@ -121,6 +143,7 @@ function App() {
         isOpen={isLoginModalOpen}
         onClose={closeAllPopups}
         openRegistrationModal={handleRegistrationClick}
+        onLogin={onLogin}
       />
       <RegisterModal
         isOpen={isRegisterModalOpen}

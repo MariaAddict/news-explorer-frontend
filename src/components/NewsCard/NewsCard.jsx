@@ -36,7 +36,8 @@ function NewsCard({ card, mainTheme }) {
               ? "cards__button-save_theme_main"
               : "cards__button-save_theme_save-news"
           }`}
-          onClick={handleSaveClick}
+          onMouseEnter={handleSaveClick}
+          onMouseLeave={handleSaveClick}
         ></button>
         <button
           type="button"
@@ -44,7 +45,6 @@ function NewsCard({ card, mainTheme }) {
             saveIsClick ? "" : "cards__button-no-save_hidden"
           }`}
         >
-          {/* onClick={handleSaveClick} */}
           {mainTheme
             ? "Войдите, чтобы сохранять статьи"
             : "Убрать из сохранённых"}

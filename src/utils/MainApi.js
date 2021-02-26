@@ -20,6 +20,15 @@ class MainApi {
             body: JSON.stringify({ email, password, name })
         }).then(handleResponse)
     }
+
+    authorization (email, password ) {
+        return fetch(`${this._url}signin`, {
+            method: 'POST',
+            headers: this._headers,
+            body: JSON.stringify({ email, password })
+        })
+            .then(handleResponse)
+    }
 }
 
 const apiMain = new MainApi(BASE_URL, {

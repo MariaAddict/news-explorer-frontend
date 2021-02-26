@@ -2,7 +2,7 @@ import '../PopupWithForm/PopupWithForm.css';
 import { useState, useCallback} from 'react';
 import PopupWithForm from '../PopupWithForm/PopupWithForm.jsx';
 
-function LoginModal({ isOpen, onClose, openRegistrationModal }) {
+function LoginModal({ isOpen, onClose, openRegistrationModal, onLogin }) {
     const [data, setData] = useState({
         email: '',
         password: ''
@@ -30,7 +30,7 @@ function LoginModal({ isOpen, onClose, openRegistrationModal }) {
 
     function handleSubmit(e) {
         e.preventDefault();
-        // onLogin(data.password, data.email);
+        onLogin(data.email, data.password);
         resetForm();
         onClose();
     }

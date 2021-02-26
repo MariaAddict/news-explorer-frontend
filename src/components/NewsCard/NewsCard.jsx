@@ -20,7 +20,7 @@ function NewsCard({ card, mainTheme }) {
 
   return (
     <li className="cards__item">
-      <a href={card.url} className="cards__link">
+      <a href={card.url} className="cards__link" target="_blank" rel="noopener noreferrer">
         <img src={card.urlToImage} alt={card.title} className="cards__image" />
         <div className="cards__description">
           <p className="cards__date">{dateCard}</p>

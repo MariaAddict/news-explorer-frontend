@@ -119,6 +119,11 @@
   margin-bottom: 13px;
 }
 
+.modal__error_type_registation {
+  text-align: center;
+  margin-bottom: 0;
+}
+
 .modal__save-button {
   max-width: 360px;
   width: 100%;

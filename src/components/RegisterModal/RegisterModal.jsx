@@ -2,7 +2,7 @@ import '../PopupWithForm/PopupWithForm.css';
 import { useState, useCallback} from 'react';
 import PopupWithForm from '../PopupWithForm/PopupWithForm.jsx';
 
-function RegisterModal({ isOpen, onClose, openLoginModal }) {
+function RegisterModal({ isOpen, onClose, openLoginModal, onSignUp, registrationError }) {
     const [data, setData] = useState({
         email: '',
         password: '',
@@ -33,6 +33,7 @@ function RegisterModal({ isOpen, onClose, openLoginModal }) {
 
     function handleSubmit(e) {
         e.preventDefault();
+        onSignUp(data.email, data.password, data.name);
         resetForm();
     }
 
@@ -55,6 +56,7 @@ function RegisterModal({ isOpen, onClose, openLoginModal }) {
             <input type="text" name="name" className="modal__input modal__input_type_password"
                     placeholder="Введите свое имя"  value={data.name} onChange={handleChange} minLength="1" required  />
             <span className={`modal__error ${!errors.name ? "" : "modal__error_visible"}`} id="activity-error">{errors.name}</span>
+            {registrationError && (<span className={"modal__error  modal__error_visible modal__error_type_registation"} id="registration-error">Такой пользователь уже есть</span>)}
             <button type="submit" className={`modal__save-button ${isValid ? "" : "modal__save-button_disabled"}`} disabled={!isValid} ><span className="modal__name-button">Зарегистрироваться</span></button>
             <p className="modal__reg-name">или <span type="button" className="modal__req-link" onClick={handleLoginClick}>Войти</span></p>
         </PopupWithForm>

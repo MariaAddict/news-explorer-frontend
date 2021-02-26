@@ -8,6 +8,7 @@ import LoginModal from "../LoginModal/LoginModal.jsx";
 import RegisterModal from "../RegisterModal/RegisterModal.jsx";
 import InfoTooltip from "../InfoTooltip/InfoTooltip.jsx";
 import apiNews from "../../utils/NewsApi.js";
+import apiMain from '../../utils/MainApi.js';
 
 function App() {
   const location = useLocation();
@@ -21,6 +22,8 @@ function App() {
   const [isNotFoundArticles, setIsNotFoundArticles] = useState(false);
   const [numberOfArticles, setNumberOfArticles] = useState(3);
   const [errorApiNews, setErrorApiNews] = useState(false);
+  const [registrationError, setRegistrationError] = useState(false);
+  const [currentUser, setCurrentUser] = useState({ email: '', name: '', _id: '' });
 
 
   useEffect(() => {
@@ -38,10 +41,6 @@ function App() {
 
   function handleRegistrationClick() {
     setIsRegisterModalOpen(true);
-  }
-
-  function handleInfoTooltipClick() {
-    setInfoTooltipOpen(true);
   }
 
   function closeAllPopups() {
@@ -79,6 +78,21 @@ function App() {
     setNumberOfArticles(numberOfArticles + 3);
   }
 
+  function onSignUp(email, password, name) {
+    setRegistrationError(false);
+    apiMain.register(email, password, name).then((user) => {
+      if (user) {
+        setIsRegisterModalOpen(false);
+        setInfoTooltipOpen(true);
+      }
+    }).catch(err => {
+      if (err === 409) {
+        setRegistrationError(true);
+      }
+      console.log(err);
+  });
+  }
+
   return (
     <div className="App">
       <Switch>
@@ -112,6 +126,8 @@ function App() {
         isOpen={isRegisterModalOpen}
         onClose={closeAllPopups}
         openLoginModal={handleLoginClick}
+        onSignUp = {onSignUp}
+        registrationError = {registrationError}
       />
       <InfoTooltip
         isOpen={infoTooltipOpen}

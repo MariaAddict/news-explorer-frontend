@@ -19,6 +19,7 @@ function App() {
   const [isNewsCardList, setIsNewsCardList] = useState(false);
   const [loader, setLoader] = useState(false);
   const [isNotFoundArticles, setIsNotFoundArticles] = useState(false);
+  const [numberOfArticles, setNumberOfArticles] = useState(3);
 
 
   useEffect(() => {
@@ -68,6 +69,10 @@ function App() {
   });
   }
 
+  function handleButtonCardListClick() {
+    setNumberOfArticles(numberOfArticles + 3);
+  }
+
   return (
     <div className="App">
       <Switch>
@@ -82,6 +87,8 @@ function App() {
             loader= {loader}
             isNewsCardList= {isNewsCardList}
             isNotFoundArticles= {isNotFoundArticles}
+            handleButtonCardListClick = {handleButtonCardListClick}
+            numberOfArticles= {numberOfArticles}
           />
         </Route>
         <Route path="/saved-news">

@@ -20,6 +20,7 @@ function App() {
   const [loader, setLoader] = useState(false);
   const [isNotFoundArticles, setIsNotFoundArticles] = useState(false);
   const [numberOfArticles, setNumberOfArticles] = useState(3);
+  const [errorApiNews, setErrorApiNews] = useState(false);
 
 
   useEffect(() => {
@@ -50,6 +51,7 @@ function App() {
   }
 
   function submitSearchForm(word) {
+    setErrorApiNews(true);
     setIsNewsCardList(false);
     setIsNotFoundArticles(false);
     setLoader(true);
@@ -67,6 +69,7 @@ function App() {
     }
     ).catch(err => {
       console.log(err);
+      setErrorApiNews(true);
   }).finally(() => {
     setLoader(false);
   });
@@ -92,6 +95,7 @@ function App() {
             isNotFoundArticles= {isNotFoundArticles}
             handleButtonCardListClick = {handleButtonCardListClick}
             numberOfArticles= {numberOfArticles}
+            errorApiNews = {errorApiNews}
           />
         </Route>
         <Route path="/saved-news">

@@ -18,6 +18,7 @@ function Main({
   isNotFoundArticles,
   handleButtonCardListClick,
   numberOfArticles,
+  errorApiNews
 }) {
   return (
     <main>
@@ -34,7 +35,7 @@ function Main({
           Находите самые свежие статьи на&nbsp;любую тему и&nbsp;сохраняйте
           в&nbsp;своём личном кабинете.
         </p>
-        <SearchForm onSubmit={submitSearchForm} />
+        <SearchForm onSubmit={submitSearchForm} errorApiNews={errorApiNews} />
       </div>
       {isNewsCardList && (
         <NewsCardList mainTheme={mainTheme} articles={articles} onClick={handleButtonCardListClick} numberOfArticles={numberOfArticles} />

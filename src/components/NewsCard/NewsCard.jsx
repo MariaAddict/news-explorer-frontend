@@ -28,7 +28,8 @@ function NewsCard({ card, mainTheme }) {
           <p className="cards__text">{card.description}</p>
         </div>
         <p className="cards__source">{card.source.name}</p>
-        <button
+      </a>
+      <button
           type="button"
           className={`cards__button-save ${
             mainTheme
@@ -53,7 +54,6 @@ function NewsCard({ card, mainTheme }) {
             <p className="cards__keyword-text">{card.keyword}</p>
           </div>
         )}
-      </a>
     </li>
   );
 }

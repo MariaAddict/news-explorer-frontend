@@ -60,6 +60,8 @@ function App() {
       } else {
         setIsNewsCardList(true);
         setArticles(data.articles);
+        localStorage.setItem('articles', JSON.stringify(data.articles));
+        localStorage.setItem('search-word', word);
       }
     }
     ).catch(err => {

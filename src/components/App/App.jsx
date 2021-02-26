@@ -8,7 +8,8 @@ import LoginModal from "../LoginModal/LoginModal.jsx";
 import RegisterModal from "../RegisterModal/RegisterModal.jsx";
 import InfoTooltip from "../InfoTooltip/InfoTooltip.jsx";
 import apiNews from "../../utils/NewsApi.js";
-import apiMain from '../../utils/MainApi.js';
+import apiMain from "../../utils/MainApi.js";
+import CurrentUserContext from "../../contexts/CurrentUserContext.js";
 
 function App() {
   const location = useLocation();
@@ -24,18 +25,26 @@ function App() {
   const [errorApiNews, setErrorApiNews] = useState(false);
   const [registrationError, setRegistrationError] = useState(false);
   const [loggedIn, setLoggedIn] = useState(false);
-  const [currentUser, setCurrentUser] = useState({ email: '', name: '', _id: '' });
+  const [currentUser, setCurrentUser] = useState({
+    email: "",
+    name: "",
+    _id: "",
+  });
 
+  useEffect(() => {
+    if (loggedIn) {
+      apiMain
+        .getUserData()
+        .then((dataUser) => {
+          console.log("user data: ", dataUser);
+          setCurrentUser(dataUser);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  }, [loggedIn]);
 
-//   useEffect(() => {
-//     if (loggedIn) {
-//       apiMain.getUserInfo().then((dataUser) => {
-//         setCurrentUser(dataUser);
-//     }).catch(err => {
-//         console.log(err);
-//     });
-// }
-// }, [loggedIn]);
   useEffect(() => {
     if (location.pathname === "/") {
       setMainTheme(true);
@@ -44,6 +53,21 @@ function App() {
       setMainTheme(false);
     }
   }, [location]);
+
+  //check token
+  useEffect(() => {
+    const jwt = localStorage.getItem('jwt');
+        apiMain.getContent(jwt)
+            .then(data => {
+                if (data) {
+                  setLoggedIn(true);
+                }
+            })
+            .catch(err => {
+                console.log(err);
+            });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+}, []);
 
   function handleLoginClick() {
     setIsLoginModalOpen(true);
@@ -65,23 +89,26 @@ function App() {
     setIsNotFoundArticles(false);
     setLoader(true);
     setNumberOfArticles(3);
-    apiNews.getNews(word).then(data => {
-      console.log(data);
-      if (data.totalResults === 0) {
-        setIsNotFoundArticles(true);
-      } else {
-        setIsNewsCardList(true);
-        setArticles(data.articles);
-        localStorage.setItem('articles', JSON.stringify(data.articles));
-        localStorage.setItem('search-word', word);
-      }
-    }
-    ).catch(err => {
-      console.log(err);
-      setErrorApiNews(true);
-  }).finally(() => {
-    setLoader(false);
-  });
+    apiNews
+      .getNews(word)
+      .then((data) => {
+        console.log(data);
+        if (data.totalResults === 0) {
+          setIsNotFoundArticles(true);
+        } else {
+          setIsNewsCardList(true);
+          setArticles(data.articles);
+          localStorage.setItem("articles", JSON.stringify(data.articles));
+          localStorage.setItem("search-word", word);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+        setErrorApiNews(true);
+      })
+      .finally(() => {
+        setLoader(false);
+      });
   }
 
   function handleButtonCardListClick() {
@@ -90,74 +117,89 @@ function App() {
 
   function onSignUp(email, password, name) {
     setRegistrationError(false);
-    apiMain.register(email, password, name).then((user) => {
-      if (user) {
-        setIsRegisterModalOpen(false);
-        setInfoTooltipOpen(true);
-      }
-    }).catch(err => {
-      if (err === 409) {
-        setRegistrationError(true);
-      }
-      console.log(err);
-  });
+    apiMain
+      .register(email, password, name)
+      .then((user) => {
+        if (user) {
+          setIsRegisterModalOpen(false);
+          setInfoTooltipOpen(true);
+        }
+      })
+      .catch((err) => {
+        if (err === 409) {
+          setRegistrationError(true);
+        }
+        console.log(err);
+      });
   }
 
   function onLogin(email, password) {
-    apiMain.authorization(email, password).then((user) => {
-      if (user.token) {
-        localStorage.setItem('jwt', user.token);
-        setLoggedIn(true);
-        setIsLoginModalOpen(false);
-    }
-    }).catch(err => {
-      console.log(err);
-  });
+    apiMain
+      .authorization(email, password)
+      .then((user) => {
+        if (user.token) {
+          localStorage.setItem("jwt", user.token);
+          setLoggedIn(true);
+          setIsLoginModalOpen(false);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
+  function signOut() {
+    localStorage.removeItem("jwt");
+    setLoggedIn(false);
   }
 
   return (
-    <div className="App">
-      <Switch>
-        <Route exact path="/">
-          <Main
-            mainTheme={mainTheme}
-            onClickAuth={handleLoginClick}
-            isLoginModalOpen={isLoginModalOpen}
-            isRegisterModalOpen={isRegisterModalOpen}
-            submitSearchForm = {submitSearchForm}
-            articles={articles}
-            loader= {loader}
-            isNewsCardList= {isNewsCardList}
-            isNotFoundArticles= {isNotFoundArticles}
-            handleButtonCardListClick = {handleButtonCardListClick}
-            numberOfArticles= {numberOfArticles}
-            errorApiNews = {errorApiNews}
-          />
-        </Route>
-        <Route path="/saved-news">
-          <SavedNews mainTheme={mainTheme} onClickAuth={handleLoginClick} />
-        </Route>
-      </Switch>
-      <Footer />
-      <LoginModal
-        isOpen={isLoginModalOpen}
-        onClose={closeAllPopups}
-        openRegistrationModal={handleRegistrationClick}
-        onLogin={onLogin}
-      />
-      <RegisterModal
-        isOpen={isRegisterModalOpen}
-        onClose={closeAllPopups}
-        openLoginModal={handleLoginClick}
-        onSignUp = {onSignUp}
-        registrationError = {registrationError}
-      />
-      <InfoTooltip
-        isOpen={infoTooltipOpen}
-        onClose={closeAllPopups}
-        openLoginModal={handleLoginClick}
-      />
-    </div>
+    <CurrentUserContext.Provider value={currentUser}>
+      <div className="App">
+        <Switch>
+          <Route exact path="/">
+            <Main
+              mainTheme={mainTheme}
+              onClickAuth={handleLoginClick}
+              isLoginModalOpen={isLoginModalOpen}
+              isRegisterModalOpen={isRegisterModalOpen}
+              submitSearchForm={submitSearchForm}
+              articles={articles}
+              loader={loader}
+              isNewsCardList={isNewsCardList}
+              isNotFoundArticles={isNotFoundArticles}
+              handleButtonCardListClick={handleButtonCardListClick}
+              numberOfArticles={numberOfArticles}
+              errorApiNews={errorApiNews}
+              loggedIn={loggedIn}
+              signOut={signOut}
+            />
+          </Route>
+          <Route path="/saved-news">
+            <SavedNews mainTheme={mainTheme} onClickAuth={handleLoginClick} />
+          </Route>
+        </Switch>
+        <Footer />
+        <LoginModal
+          isOpen={isLoginModalOpen}
+          onClose={closeAllPopups}
+          openRegistrationModal={handleRegistrationClick}
+          onLogin={onLogin}
+        />
+        <RegisterModal
+          isOpen={isRegisterModalOpen}
+          onClose={closeAllPopups}
+          openLoginModal={handleLoginClick}
+          onSignUp={onSignUp}
+          registrationError={registrationError}
+        />
+        <InfoTooltip
+          isOpen={infoTooltipOpen}
+          onClose={closeAllPopups}
+          openLoginModal={handleLoginClick}
+        />
+      </div>
+    </CurrentUserContext.Provider>
   );
 }
 

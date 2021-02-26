@@ -21,13 +21,33 @@ class MainApi {
         }).then(handleResponse)
     }
 
-    authorization (email, password ) {
+    authorization(email, password ) {
         return fetch(`${this._url}signin`, {
             method: 'POST',
             headers: this._headers,
             body: JSON.stringify({ email, password })
         })
             .then(handleResponse)
+    }
+
+    getUserData() {
+        return fetch(`${this._url}users/me`, {
+            method: 'GET',
+            headers: {
+                ...this._headers,
+                authorization: `Bearer ${localStorage.getItem('jwt')}`
+            }
+        }).then(handleResponse)
+    }
+
+    getContent(jwt) {
+        return fetch(`${this._url}users/me/`, {
+            method: 'GET',
+            headers: {
+                ...this._headers,
+                authorization: `Bearer ${jwt}`
+            }
+        }).then(handleResponse)
     }
 }
 

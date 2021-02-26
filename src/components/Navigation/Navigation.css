@@ -24,7 +24,7 @@
 }
 
 .navigation__link_theme_save-news {
-  color: #1A1B22;
+  color: #1a1b22;
 }
 
 .navigation__link_theme_burger {
@@ -46,7 +46,7 @@
 }
 
 .navigation__link_active-save-news {
-  border-bottom: 3px solid #1A1B22;;
+  border-bottom: 3px solid #1a1b22;
 }
 
 .navigation__button {
@@ -62,6 +62,9 @@
   font-weight: 500;
   margin-left: 32px;
   margin-top: 19px;
+  text-align: center;
+  display: flex;
+  align-items: center;
 }
 
 .navigation__button_theme_main {
@@ -70,8 +73,31 @@
 }
 
 .navigation__button_theme_save-news {
-  color: #1A1B22;
-  border: 1px solid #D1D2D6;
+  color: #1a1b22;
+  border: 1px solid #d1d2d6;
+}
+
+.navigation__button-name {
+  margin: 0;
+  padding: 0;
+}
+
+.navigation__logout {
+  background-size: 24px 24px;
+}
+
+.navigation__logout_theme_main {
+  background-image: url(../../images/logout-main.png);
+}
+
+.navigation__logout_theme_save-news {
+  background-image: url(../../images/logout-news.png);
+}
+
+.navigation__button-logout {
+  width: 100%;
+  display: flex;
+  align-items: center;
 }
 
 .navigation__button_theme_burger {

@@ -18,7 +18,9 @@ function Main({
   isNotFoundArticles,
   handleButtonCardListClick,
   numberOfArticles,
-  errorApiNews
+  errorApiNews,
+  loggedIn,
+  signOut
 }) {
   return (
     <main>
@@ -28,6 +30,8 @@ function Main({
           onClickAuth={onClickAuth}
           isLoginModalOpen={isLoginModalOpen}
           isRegisterModalOpen={isRegisterModalOpen}
+          loggedIn={loggedIn}
+          signOut={signOut}
         />
         <hr className="main__line"></hr>
         <h2 className="main__title">Что творится в&nbsp;мире?</h2>

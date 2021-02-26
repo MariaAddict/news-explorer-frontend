@@ -30,6 +30,7 @@ function App() {
     name: "",
     _id: "",
   });
+  const [saveArticles, setSaveArticles] = useState([]);
 
   useEffect(() => {
     if (loggedIn) {
@@ -56,18 +57,19 @@ function App() {
 
   //check token
   useEffect(() => {
-    const jwt = localStorage.getItem('jwt');
-        apiMain.getContent(jwt)
-            .then(data => {
-                if (data) {
-                  setLoggedIn(true);
-                }
-            })
-            .catch(err => {
-                console.log(err);
-            });
+    const jwt = localStorage.getItem("jwt");
+    apiMain
+      .getContent(jwt)
+      .then((data) => {
+        if (data) {
+          setLoggedIn(true);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-}, []);
+  }, []);
 
   function handleLoginClick() {
     setIsLoginModalOpen(true);
@@ -153,6 +155,37 @@ function App() {
     setLoggedIn(false);
   }
 
+  function handleSaveNews(card) {
+    const word = localStorage.getItem("search-word");
+
+      apiMain.saveNews(word, card)
+        .then((newCard) => {
+          const cardElement = {
+            keyword: word,
+            title: newCard.title,
+            description: newCard.text,
+            publishedAt: newCard.data,
+            source: {
+              name: newCard.source
+            },
+            url: newCard.link,
+            urlToImage: newCard.image,
+            _id: newCard._id,
+            owner: newCard.owner,
+            index: card.index
+          }
+
+          setSaveArticles(cardElement, ...saveArticles);
+          
+          const newCards = articles.map((c, i) => i === cardElement.index ? cardElement : c);
+          setArticles(newCards);
+          localStorage.setItem("articles", JSON.stringify(newCards));
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+  }
+
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="App">
@@ -173,6 +206,7 @@ function App() {
               errorApiNews={errorApiNews}
               loggedIn={loggedIn}
               signOut={signOut}
+              handleSaveNews={handleSaveNews}
             />
           </Route>
           <Route path="/saved-news">

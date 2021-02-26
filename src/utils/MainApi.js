@@ -49,6 +49,26 @@ class MainApi {
             }
         }).then(handleResponse)
     }
+
+    saveNews(word, card)
+        {
+        return fetch(`${this._url}articles`, {
+        method: 'POST',
+        headers: {
+            ...this._headers,
+            authorization: `Bearer ${localStorage.getItem('jwt')}`
+        },
+        body: JSON.stringify({
+            keyword: word,
+            title: card.title,
+            text: card.description,
+            date: card.publishedAt,
+            source: card.source.name,
+            link: card.url,
+            image: card.urlToImage
+        })
+    }).then(handleResponse)
+    }
 }
 
 const apiMain = new MainApi(BASE_URL, {

@@ -20,7 +20,8 @@ function Main({
   numberOfArticles,
   errorApiNews,
   loggedIn,
-  signOut
+  signOut,
+  handleSaveNews,
 }) {
   return (
     <main>
@@ -42,7 +43,14 @@ function Main({
         <SearchForm onSubmit={submitSearchForm} errorApiNews={errorApiNews} />
       </div>
       {isNewsCardList && (
-        <NewsCardList mainTheme={mainTheme} articles={articles} onClick={handleButtonCardListClick} numberOfArticles={numberOfArticles} />
+        <NewsCardList
+          mainTheme={mainTheme}
+          articles={articles}
+          onClick={handleButtonCardListClick}
+          numberOfArticles={numberOfArticles}
+          loggedIn={loggedIn}
+          handleSaveNews={handleSaveNews}
+        />
       )}
       {loader && <Preloader />}
       {isNotFoundArticles && <NotFoundArticles />}

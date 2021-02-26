@@ -1,7 +1,9 @@
 import "./NewsCard.css";
 import React, { useState } from "react";
+import CurrentUserContext from "../../contexts/CurrentUserContext.js";
 
-function NewsCard({ card, mainTheme }) {
+function NewsCard({ card, mainTheme, loggedIn, handleSaveNews }) {
+
   const options = {
     year: 'numeric',
     month: 'long',
@@ -13,9 +15,23 @@ function NewsCard({ card, mainTheme }) {
   const dateCard = (date.substr(0,date.length - 8) + "," + date.substr(date.length - 8)).slice(0, date.length - 2);
 
   const [saveIsClick, setSaveIsClick] = useState(false);
+  const currentUser = React.useContext(CurrentUserContext);
+  const isSaved = (card.owner === currentUser._id);
 
   function handleSaveClick() {
-    saveIsClick ? setSaveIsClick(false) : setSaveIsClick(true);
+    if (!loggedIn) {
+      saveIsClick ? setSaveIsClick(false) : setSaveIsClick(true);
+    }
+  }
+
+  function onClick() {
+
+    if (mainTheme) {
+      handleSaveNews(card);
+      console.log('card.owner : ', card.owner)
+      console.log('is saved: ', isSaved);
+      console.log('INDEX: ', card.index);
+    }
   }
 
   return (
@@ -33,11 +49,13 @@ function NewsCard({ card, mainTheme }) {
           type="button"
           className={`cards__button-save ${
             mainTheme
-              ? "cards__button-save_theme_main"
+              ? `cards__button-save_theme_main ${isSaved ? "cards__button-save_marked" : ""}`
               : "cards__button-save_theme_save-news"
           }`}
           onMouseEnter={handleSaveClick}
           onMouseLeave={handleSaveClick}
+          onClick={onClick}
+          disabled={!loggedIn}
         ></button>
         <button
           type="button"

@@ -51,7 +51,7 @@ function App() {
   }
 
   function submitSearchForm(word) {
-    setErrorApiNews(true);
+    setErrorApiNews(false);
     setIsNewsCardList(false);
     setIsNotFoundArticles(false);
     setLoader(true);

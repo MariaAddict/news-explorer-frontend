@@ -53,6 +53,7 @@ function App() {
     setIsNewsCardList(false);
     setIsNotFoundArticles(false);
     setLoader(true);
+    setNumberOfArticles(3);
     apiNews.getNews(word).then(data => {
       console.log(data);
       if (data.totalResults === 0) {

@@ -10,7 +10,7 @@ function NewsCardList({mainTheme, articles, onClick, numberOfArticles}) {
           <NewsCard key={i} card={card} mainTheme = {mainTheme}/>
         )).slice(0, numberOfArticles)}
       </ul>
-      {mainTheme && (<button type="button" className="card-list__button" onClick={onClick}>Показать еще</button>)}
+      {(numberOfArticles < articles.length) && mainTheme && (<button type="button" className="card-list__button" onClick={onClick}>Показать еще</button>)}
     </section>
   );
 }

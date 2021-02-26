@@ -155,7 +155,9 @@
 }
 
 .modal__save-button_disabled:hover {
-  opacity: 0.2;
+  opacity: 1;
+  background-color: #e6e8eb;
+  color: #b6bcbf;
 }
 
 .modal__reg-name {

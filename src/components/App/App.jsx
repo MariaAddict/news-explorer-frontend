@@ -32,10 +32,8 @@ function App() {
     name: "",
     _id: "",
   });
-  const [isSaveNewsCardList, setIsSaveNewsCardList ] = useState(null);
+  const [isSaveNewsCardList, setIsSaveNewsCardList] = useState(null);
   const history = useHistory();
- 
-
 
   //check token
   useEffect(() => {
@@ -72,7 +70,6 @@ function App() {
               url: card.link,
               urlToImage: card.image,
               _id: card._id,
-              owner: card.owner,
               index: card.index,
             };
             return newCard;
@@ -91,19 +88,18 @@ function App() {
     } else {
       setIsSaveNewsCardList(true);
     }
-  }, [saveArticles])
-  
+  }, [saveArticles]);
+
   useEffect(() => {
     console.log(location.pathname);
     if (location.pathname === "/") {
       setMainTheme(true);
     }
     if (location.pathname === "/saved-news") {
-      setMainTheme(false); 
+      setMainTheme(false);
     }
   }, [location]);
 
-  
   function handleLoginClick() {
     setIsLoginModalOpen(true);
   }
@@ -210,7 +206,7 @@ function App() {
           index: card.index,
         };
 
-        setSaveArticles(cardElement, ...saveArticles);
+        setSaveArticles([...saveArticles, cardElement]);
 
         const newCards = articles.map((c, i) =>
           i === cardElement.index ? cardElement : c
@@ -223,66 +219,77 @@ function App() {
       });
   }
 
-  function handleDeleteNews() {}
+  function handleDeleteNews(idArticles, card) {
+    console.log(idArticles, card);
+    apiMain
+      .deleteNews(idArticles)
+      .then(() => {
+        const newArticles = saveArticles.filter((c) => !(c._id === idArticles));
+        setSaveArticles(newArticles);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
 
-    return (
-      <CurrentUserContext.Provider value={currentUser}>
-          <div className="App">
-            <Switch>
-              <Route exact path="/">
-                <Main
-                  mainTheme={mainTheme}
-                  onClickAuth={handleLoginClick}
-                  isLoginModalOpen={isLoginModalOpen}
-                  isRegisterModalOpen={isRegisterModalOpen}
-                  submitSearchForm={submitSearchForm}
-                  articles={articles}
-                  loader={loader}
-                  isNewsCardList={isNewsCardList}
-                  isNotFoundArticles={isNotFoundArticles}
-                  handleButtonCardListClick={handleButtonCardListClick}
-                  numberOfArticles={numberOfArticles}
-                  errorApiNews={errorApiNews}
-                  loggedIn={loggedIn}
-                  signOut={signOut}
-                  handleSaveNews={handleSaveNews}
-                />
-              </Route>
-              <ProtectedRoute
-                path="/saved-news/"
-                component={SavedNews}
-                loggedIn={loggedIn}
-                mainTheme={mainTheme}
-                onClickAuth={handleLoginClick}
-                saveArticles={saveArticles}
-                handleButtonCardListClick={handleButtonCardListClick}
-                signOut={signOut}
-                isSaveNewsCardList={isSaveNewsCardList}
-                handleDeleteNews={handleDeleteNews}
-              ></ProtectedRoute>
-            </Switch>
-            <Footer />
-            <LoginModal
-              isOpen={isLoginModalOpen}
-              onClose={closeAllPopups}
-              openRegistrationModal={handleRegistrationClick}
-              onLogin={onLogin}
+  return (
+    <CurrentUserContext.Provider value={currentUser}>
+      <div className="App">
+        <Switch>
+          <Route exact path="/">
+            <Main
+              mainTheme={mainTheme}
+              onClickAuth={handleLoginClick}
+              isLoginModalOpen={isLoginModalOpen}
+              isRegisterModalOpen={isRegisterModalOpen}
+              submitSearchForm={submitSearchForm}
+              articles={articles}
+              loader={loader}
+              isNewsCardList={isNewsCardList}
+              isNotFoundArticles={isNotFoundArticles}
+              handleButtonCardListClick={handleButtonCardListClick}
+              numberOfArticles={numberOfArticles}
+              errorApiNews={errorApiNews}
+              loggedIn={loggedIn}
+              signOut={signOut}
+              handleSaveNews={handleSaveNews}
             />
-            <RegisterModal
-              isOpen={isRegisterModalOpen}
-              onClose={closeAllPopups}
-              openLoginModal={handleLoginClick}
-              onSignUp={onSignUp}
-              registrationError={registrationError}
-            />
-            <InfoTooltip
-              isOpen={infoTooltipOpen}
-              onClose={closeAllPopups}
-              openLoginModal={handleLoginClick}
-            />
-          </div>
-      </CurrentUserContext.Provider>
-    );
+          </Route>
+          <ProtectedRoute
+            path="/saved-news/"
+            component={SavedNews}
+            loggedIn={loggedIn}
+            mainTheme={mainTheme}
+            onClickAuth={handleLoginClick}
+            saveArticles={saveArticles}
+            handleButtonCardListClick={handleButtonCardListClick}
+            signOut={signOut}
+            isSaveNewsCardList={isSaveNewsCardList}
+            handleDeleteNews={handleDeleteNews}
+          ></ProtectedRoute>
+        </Switch>
+        <Footer />
+        <LoginModal
+          isOpen={isLoginModalOpen}
+          onClose={closeAllPopups}
+          openRegistrationModal={handleRegistrationClick}
+          onLogin={onLogin}
+        />
+        <RegisterModal
+          isOpen={isRegisterModalOpen}
+          onClose={closeAllPopups}
+          openLoginModal={handleLoginClick}
+          onSignUp={onSignUp}
+          registrationError={registrationError}
+        />
+        <InfoTooltip
+          isOpen={infoTooltipOpen}
+          onClose={closeAllPopups}
+          openLoginModal={handleLoginClick}
+        />
+      </div>
+    </CurrentUserContext.Provider>
+  );
 }
 
 export default App;

@@ -19,7 +19,7 @@ function NewsCard({ card, mainTheme, loggedIn, handleSaveNews, handleDeleteNews 
   const isSaved = (card.owner === currentUser._id);
 
   function handleSaveClick() {
-    if (!loggedIn) {  //(!loggedIn && mainTheme) || (loggedIn && !mainTheme)
+    if (!loggedIn) {
       saveIsClick ? setSaveIsClick(false) : setSaveIsClick(true);
     }
   }
@@ -28,8 +28,8 @@ function NewsCard({ card, mainTheme, loggedIn, handleSaveNews, handleDeleteNews 
     if (mainTheme === loggedIn) {
       handleSaveNews(card);
     }
-    if (!mainTheme === loggedIn) {
-      handleDeleteNews(card);
+    if (!mainTheme) {
+      handleDeleteNews(card._id, card);
     }
   }
 

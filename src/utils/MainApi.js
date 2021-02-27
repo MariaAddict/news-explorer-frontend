@@ -21,7 +21,7 @@ class MainApi {
         }).then(handleResponse)
     }
 
-    authorization(email, password ) {
+    authorization(email, password) {
         return fetch(`${this._url}signin`, {
             method: 'POST',
             headers: this._headers,
@@ -61,24 +61,33 @@ class MainApi {
             .then(handleResponse)
     }
 
-    saveNews(word, card)
-        {
+    saveNews(word, card) {
         return fetch(`${this._url}articles`, {
-        method: 'POST',
-        headers: {
-            ...this._headers,
-            authorization: `Bearer ${localStorage.getItem('jwt')}`
-        },
-        body: JSON.stringify({
-            keyword: word,
-            title: card.title,
-            text: card.description,
-            date: card.publishedAt,
-            source: card.source.name,
-            link: card.url,
-            image: card.urlToImage
-        })
-    }).then(handleResponse)
+            method: 'POST',
+            headers: {
+                ...this._headers,
+                authorization: `Bearer ${localStorage.getItem('jwt')}`
+            },
+            body: JSON.stringify({
+                keyword: word,
+                title: card.title,
+                text: card.description,
+                date: card.publishedAt,
+                source: card.source.name,
+                link: card.url,
+                image: card.urlToImage
+            })
+        }).then(handleResponse)
+    }
+
+    deleteNews(id) {
+        return fetch(`${this._url}articles/${id}`, {
+            method: 'DELETE',
+            headers: {
+                ...this._headers,
+                authorization: `Bearer ${localStorage.getItem('jwt')}`
+            }
+        }).then(handleResponse)
     }
 }
 

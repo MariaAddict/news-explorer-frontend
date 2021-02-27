@@ -1,17 +1,17 @@
 import "./SavedNews.css";
 import Header from "../Header/Header.jsx";
 import SavedNewsHeader from "../SavedNewsHeader/SavedNewsHeader.jsx";
-import NewsCardList from "../NewsCardList/NewsCardList.jsx";
+import SaveNewsCardList from "../SaveNewsCardList/SaveNewsCardList.jsx";
 
-function SavedNews({mainTheme, onClickAuth}) {
+function SavedNews(props) {
   return (
     <section>
       <div className="save-news">
-        <Header mainTheme = {mainTheme} onClickAuth={onClickAuth} />
+        <Header mainTheme={props.mainTheme} onClickAuth={props.onClickAuth} loggedIn={props.loggedIn} signOut={props.signOut} />
         <hr className="main__line"></hr>
         <SavedNewsHeader />
       </div>
-      <NewsCardList mainTheme = {mainTheme} />
+      <SaveNewsCardList mainTheme = {props.mainTheme} saveArticles={props.saveArticles} isSaveNewsCardList={props.isSaveNewsCardList} handleDeleteNews={handleDeleteNews} />
     </section>
   );
 }

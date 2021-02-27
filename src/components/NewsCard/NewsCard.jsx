@@ -2,7 +2,7 @@ import "./NewsCard.css";
 import React, { useState } from "react";
 import CurrentUserContext from "../../contexts/CurrentUserContext.js";
 
-function NewsCard({ card, mainTheme, loggedIn, handleSaveNews }) {
+function NewsCard({ card, mainTheme, loggedIn, handleSaveNews, handleDeleteNews }) {
 
   const options = {
     year: 'numeric',
@@ -19,18 +19,17 @@ function NewsCard({ card, mainTheme, loggedIn, handleSaveNews }) {
   const isSaved = (card.owner === currentUser._id);
 
   function handleSaveClick() {
-    if (!loggedIn) {
+    if (!loggedIn) {  //(!loggedIn && mainTheme) || (loggedIn && !mainTheme)
       saveIsClick ? setSaveIsClick(false) : setSaveIsClick(true);
     }
   }
 
   function onClick() {
-
-    if (mainTheme) {
+    if (mainTheme === loggedIn) {
       handleSaveNews(card);
-      console.log('card.owner : ', card.owner)
-      console.log('is saved: ', isSaved);
-      console.log('INDEX: ', card.index);
+    }
+    if (!mainTheme === loggedIn) {
+      handleDeleteNews(card);
     }
   }
 
@@ -55,7 +54,7 @@ function NewsCard({ card, mainTheme, loggedIn, handleSaveNews }) {
           onMouseEnter={handleSaveClick}
           onMouseLeave={handleSaveClick}
           onClick={onClick}
-          disabled={!loggedIn}
+          // disabled={!loggedIn}
         ></button>
         <button
           type="button"

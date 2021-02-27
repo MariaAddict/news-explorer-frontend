@@ -1,6 +1,6 @@
 import "./App.css";
 import React, { useEffect, useState } from "react";
-import { Route, Switch, useLocation } from "react-router-dom";
+import { Route, Switch, useLocation, useHistory } from "react-router-dom";
 import Footer from "../Footer/Footer.jsx";
 import Main from "../Main/Main.jsx";
 import SavedNews from "../SavedNews/SavedNews.jsx";
@@ -10,9 +10,11 @@ import InfoTooltip from "../InfoTooltip/InfoTooltip.jsx";
 import apiNews from "../../utils/NewsApi.js";
 import apiMain from "../../utils/MainApi.js";
 import CurrentUserContext from "../../contexts/CurrentUserContext.js";
+import ProtectedRoute from "../ProtectedRoute/ProtectedRoute.jsx";
 
 function App() {
   const location = useLocation();
+  const [saveArticles, setSaveArticles] = useState([]);
   const [mainTheme, setMainTheme] = useState(true);
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
   const [isRegisterModalOpen, setIsRegisterModalOpen] = useState(false);
@@ -24,21 +26,43 @@ function App() {
   const [numberOfArticles, setNumberOfArticles] = useState(3);
   const [errorApiNews, setErrorApiNews] = useState(false);
   const [registrationError, setRegistrationError] = useState(false);
-  const [loggedIn, setLoggedIn] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(null);
   const [currentUser, setCurrentUser] = useState({
     email: "",
     name: "",
     _id: "",
   });
-  const [saveArticles, setSaveArticles] = useState([]);
+  const [isSaveNewsCardList, setIsSaveNewsCardList ] = useState(null);
+  const history = useHistory();
+
+  const isToken = localStorage.getItem("jwt") !== null;
 
   useEffect(() => {
     if (loggedIn) {
-      apiMain
-        .getUserData()
-        .then((dataUser) => {
-          console.log("user data: ", dataUser);
+      localStorage.removeItem("articles");
+      localStorage.removeItem("search-word");
+      Promise.all([apiMain.getUserData(), apiMain.getSaveArticles()])
+        .then(([dataUser, dataSaveArticles]) => {
           setCurrentUser(dataUser);
+          const dataArticles = dataSaveArticles.map((card) => {
+            const newCard = {
+              keyword: card.keyword,
+              title: card.title,
+              description: card.text,
+              publishedAt: card.data,
+              source: {
+                name: card.source,
+              },
+              url: card.link,
+              urlToImage: card.image,
+              _id: card._id,
+              owner: card.owner,
+              index: card.index,
+            };
+            return newCard;
+          });
+          setSaveArticles(dataArticles);
+          
         })
         .catch((err) => {
           console.log(err);
@@ -46,6 +70,14 @@ function App() {
     }
   }, [loggedIn]);
 
+  useEffect(() => {
+    if (saveArticles.length === 0) {
+      setIsSaveNewsCardList(false);
+    } else {
+      setIsSaveNewsCardList(true);
+    }
+  }, [saveArticles])
+  
   useEffect(() => {
     if (location.pathname === "/") {
       setMainTheme(true);
@@ -153,88 +185,103 @@ function App() {
   function signOut() {
     localStorage.removeItem("jwt");
     setLoggedIn(false);
+    history.push("/");
   }
 
   function handleSaveNews(card) {
     const word = localStorage.getItem("search-word");
 
-      apiMain.saveNews(word, card)
-        .then((newCard) => {
-          const cardElement = {
-            keyword: word,
-            title: newCard.title,
-            description: newCard.text,
-            publishedAt: newCard.data,
-            source: {
-              name: newCard.source
-            },
-            url: newCard.link,
-            urlToImage: newCard.image,
-            _id: newCard._id,
-            owner: newCard.owner,
-            index: card.index
-          }
+    apiMain
+      .saveNews(word, card)
+      .then((newCard) => {
+        const cardElement = {
+          keyword: word,
+          title: newCard.title,
+          description: newCard.text,
+          publishedAt: newCard.data,
+          source: {
+            name: newCard.source,
+          },
+          url: newCard.link,
+          urlToImage: newCard.image,
+          _id: newCard._id,
+          owner: newCard.owner,
+          index: card.index,
+        };
 
-          setSaveArticles(cardElement, ...saveArticles);
-          
-          const newCards = articles.map((c, i) => i === cardElement.index ? cardElement : c);
-          setArticles(newCards);
-          localStorage.setItem("articles", JSON.stringify(newCards));
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+        setSaveArticles(cardElement, ...saveArticles);
+
+        const newCards = articles.map((c, i) =>
+          i === cardElement.index ? cardElement : c
+        );
+        setArticles(newCards);
+        localStorage.setItem("articles", JSON.stringify(newCards));
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
-  return (
-    <CurrentUserContext.Provider value={currentUser}>
-      <div className="App">
-        <Switch>
-          <Route exact path="/">
-            <Main
-              mainTheme={mainTheme}
-              onClickAuth={handleLoginClick}
-              isLoginModalOpen={isLoginModalOpen}
-              isRegisterModalOpen={isRegisterModalOpen}
-              submitSearchForm={submitSearchForm}
-              articles={articles}
-              loader={loader}
-              isNewsCardList={isNewsCardList}
-              isNotFoundArticles={isNotFoundArticles}
-              handleButtonCardListClick={handleButtonCardListClick}
-              numberOfArticles={numberOfArticles}
-              errorApiNews={errorApiNews}
-              loggedIn={loggedIn}
-              signOut={signOut}
-              handleSaveNews={handleSaveNews}
+  function handleDeleteNews() {}
+
+    return (
+      <CurrentUserContext.Provider value={currentUser}>
+          <div className="App">
+            <Switch>
+              <Route exact path="/">
+                <Main
+                  mainTheme={mainTheme}
+                  onClickAuth={handleLoginClick}
+                  isLoginModalOpen={isLoginModalOpen}
+                  isRegisterModalOpen={isRegisterModalOpen}
+                  submitSearchForm={submitSearchForm}
+                  articles={articles}
+                  loader={loader}
+                  isNewsCardList={isNewsCardList}
+                  isNotFoundArticles={isNotFoundArticles}
+                  handleButtonCardListClick={handleButtonCardListClick}
+                  numberOfArticles={numberOfArticles}
+                  errorApiNews={errorApiNews}
+                  loggedIn={loggedIn}
+                  signOut={signOut}
+                  handleSaveNews={handleSaveNews}
+                />
+              </Route>
+              <ProtectedRoute
+                path="/saved-news/"
+                component={SavedNews}
+                loggedIn={loggedIn}
+                mainTheme={mainTheme}
+                onClickAuth={handleLoginClick}
+                saveArticles={saveArticles}
+                handleButtonCardListClick={handleButtonCardListClick}
+                signOut={signOut}
+                isSaveNewsCardList={isSaveNewsCardList}
+                handleDeleteNews={handleDeleteNews}
+              ></ProtectedRoute>
+            </Switch>
+            <Footer />
+            <LoginModal
+              isOpen={isLoginModalOpen}
+              onClose={closeAllPopups}
+              openRegistrationModal={handleRegistrationClick}
+              onLogin={onLogin}
             />
-          </Route>
-          <Route path="/saved-news">
-            <SavedNews mainTheme={mainTheme} onClickAuth={handleLoginClick} />
-          </Route>
-        </Switch>
-        <Footer />
-        <LoginModal
-          isOpen={isLoginModalOpen}
-          onClose={closeAllPopups}
-          openRegistrationModal={handleRegistrationClick}
-          onLogin={onLogin}
-        />
-        <RegisterModal
-          isOpen={isRegisterModalOpen}
-          onClose={closeAllPopups}
-          openLoginModal={handleLoginClick}
-          onSignUp={onSignUp}
-          registrationError={registrationError}
-        />
-        <InfoTooltip
-          isOpen={infoTooltipOpen}
-          onClose={closeAllPopups}
-          openLoginModal={handleLoginClick}
-        />
-      </div>
-    </CurrentUserContext.Provider>
-  );
+            <RegisterModal
+              isOpen={isRegisterModalOpen}
+              onClose={closeAllPopups}
+              openLoginModal={handleLoginClick}
+              onSignUp={onSignUp}
+              registrationError={registrationError}
+            />
+            <InfoTooltip
+              isOpen={infoTooltipOpen}
+              onClose={closeAllPopups}
+              openLoginModal={handleLoginClick}
+            />
+          </div>
+      </CurrentUserContext.Provider>
+    );
 }
 
 export default App;

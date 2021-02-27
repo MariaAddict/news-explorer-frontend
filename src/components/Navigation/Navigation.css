@@ -158,4 +158,12 @@
     min-height: 56px;
     margin: 22px 0 24px;
   }
+
+  .navigation__button-logout {
+    justify-content: center;
+  }
+
+  .navigation__logout_theme_save-news {
+    background-image: url(../../images/logout-main.png);
+  }
 }

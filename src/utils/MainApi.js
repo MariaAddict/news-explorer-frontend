@@ -50,6 +50,17 @@ class MainApi {
         }).then(handleResponse)
     }
 
+    getSaveArticles() {
+        return fetch(`${this._url}articles`, {
+            method: 'GET',
+            headers: {
+                ...this._headers,
+                authorization: `Bearer ${localStorage.getItem('jwt')}`
+            }
+        })
+            .then(handleResponse)
+    }
+
     saveNews(word, card)
         {
         return fetch(`${this._url}articles`, {

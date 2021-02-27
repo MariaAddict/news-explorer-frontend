@@ -9,7 +9,7 @@ function SavedNews(props) {
       <div className="save-news">
         <Header mainTheme={props.mainTheme} onClickAuth={props.onClickAuth} loggedIn={props.loggedIn} signOut={props.signOut} />
         <hr className="main__line"></hr>
-        <SavedNewsHeader />
+        <SavedNewsHeader saveArticles={props.saveArticles} />
       </div>
       <NewsCardList mainTheme = {props.mainTheme} articles={props.saveArticles} isSaveNewsCardList={props.isSaveNewsCardList} handleDeleteNews={props.handleDeleteNews} />
     </section>

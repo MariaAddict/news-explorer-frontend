@@ -15,6 +15,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "deploy": "npm run build && scp -r ./build/* _mortany_27@84.252.128.89:/home/_mortany_27/news-explorer-frontend",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {

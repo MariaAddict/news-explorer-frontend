@@ -26,13 +26,13 @@ function App() {
   const [numberOfArticles, setNumberOfArticles] = useState(3);
   const [errorApiNews, setErrorApiNews] = useState(false);
   const [registrationError, setRegistrationError] = useState(false);
-  const [loggedIn, setLoggedIn] = useState(null);
+  const [loggedIn, setLoggedIn] = useState(false);
   const [currentUser, setCurrentUser] = useState({
     email: "",
     name: "",
     _id: "",
   });
-  const [isSaveNewsCardList, setIsSaveNewsCardList] = useState(null);
+  const [isSaveNewsCardList, setIsSaveNewsCardList] = useState(false);
   const [keyword, setKeyword] = useState("");
   const [isLocalStorageData, setIsLocalStorageData] = useState(false);
   const history = useHistory();

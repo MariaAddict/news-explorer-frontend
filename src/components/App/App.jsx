@@ -34,8 +34,24 @@ function App() {
   });
   const [isSaveNewsCardList, setIsSaveNewsCardList ] = useState(null);
   const history = useHistory();
+ 
 
-  const isToken = localStorage.getItem("jwt") !== null;
+
+  //check token
+  useEffect(() => {
+    const jwt = localStorage.getItem("jwt");
+    apiMain
+      .getContent(jwt)
+      .then((data) => {
+        if (data) {
+          setLoggedIn(true);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   useEffect(() => {
     if (loggedIn) {
@@ -62,7 +78,6 @@ function App() {
             return newCard;
           });
           setSaveArticles(dataArticles);
-          
         })
         .catch((err) => {
           console.log(err);
@@ -79,30 +94,16 @@ function App() {
   }, [saveArticles])
   
   useEffect(() => {
+    console.log(location.pathname);
     if (location.pathname === "/") {
       setMainTheme(true);
     }
     if (location.pathname === "/saved-news") {
-      setMainTheme(false);
+      setMainTheme(false); 
     }
   }, [location]);
 
-  //check token
-  useEffect(() => {
-    const jwt = localStorage.getItem("jwt");
-    apiMain
-      .getContent(jwt)
-      .then((data) => {
-        if (data) {
-          setLoggedIn(true);
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
+  
   function handleLoginClick() {
     setIsLoginModalOpen(true);
   }

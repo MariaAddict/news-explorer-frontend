@@ -5,7 +5,7 @@ import NewsCard from "../NewsCard/NewsCard.jsx";
 function NewsCardList(props) {
   return (
     <section className={`card-list ${props.mainTheme ? "card-list_theme_main" : "card-list_theme_save-news"}`}>
-      <h3 className="card-list__title">Результаты поиска</h3>
+      {props.mainTheme && (<h3 className="card-list__title">Результаты поиска</h3>)}
       <ul className="cards">
         {props.articles.map((card, i) => {
           card.index = i;

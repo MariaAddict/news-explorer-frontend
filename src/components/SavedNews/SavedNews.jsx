@@ -1,7 +1,7 @@
 import "./SavedNews.css";
 import Header from "../Header/Header.jsx";
 import SavedNewsHeader from "../SavedNewsHeader/SavedNewsHeader.jsx";
-import SaveNewsCardList from "../SaveNewsCardList/SaveNewsCardList.jsx";
+import NewsCardList from "../NewsCardList/NewsCardList.jsx";
 
 function SavedNews(props) {
   return (
@@ -11,7 +11,7 @@ function SavedNews(props) {
         <hr className="main__line"></hr>
         <SavedNewsHeader />
       </div>
-      <SaveNewsCardList mainTheme = {props.mainTheme} saveArticles={props.saveArticles} isSaveNewsCardList={props.isSaveNewsCardList} handleDeleteNews={handleDeleteNews} />
+      <NewsCardList mainTheme = {props.mainTheme} articles={props.saveArticles} isSaveNewsCardList={props.isSaveNewsCardList} handleDeleteNews={props.handleDeleteNews} />
     </section>
   );
 }

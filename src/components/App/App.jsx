@@ -230,6 +230,7 @@ function App() {
           i === cardElement.index ? cardElement : c
         );
         setArticles(newCards);
+        console.log('articles in saved: ',articles);
         localStorage.setItem("articles", JSON.stringify(newCards));
       })
       .catch((err) => {
@@ -238,12 +239,34 @@ function App() {
   }
 
   function handleDeleteNews(idArticles, card) {
+    const word = localStorage.getItem("search-word");
     console.log(idArticles, card);
     apiMain
       .deleteNews(idArticles)
-      .then(() => {
+      .then((data) => {
         const newArticles = saveArticles.filter((c) => !(c._id === idArticles));
-        setSaveArticles(newArticles);
+        setSaveArticles(newArticles); 
+
+        const newElement = {
+          keyword: word,
+          title: data.title,
+          description: data.text,
+          publishedAt: data.data,
+          source: {
+            name: data.source,
+          },
+          url: data.link,
+          urlToImage: data.image,
+          index: card.index,
+        };
+        
+        const articlesNotMarked = articles.map((c, i) => {
+          return i === newElement.index ? newElement : c;
+        }
+        
+      );
+      setArticles(articlesNotMarked);
+      localStorage.setItem("articles", JSON.stringify(articlesNotMarked));
       })
       .catch((err) => {
         console.log(err);
@@ -273,6 +296,7 @@ function App() {
               handleSaveNews={handleSaveNews}
               keyword={keyword}
               isLocalStorageData={isLocalStorageData}
+              handleDeleteNews={handleDeleteNews}
             />
           </Route>
           <ProtectedRoute

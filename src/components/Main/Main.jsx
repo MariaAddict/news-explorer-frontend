@@ -23,7 +23,8 @@ function Main({
   signOut,
   handleSaveNews,
   keyword,
-  isLocalStorageData
+  isLocalStorageData,
+  handleDeleteNews
 }) {
   return (
     <main>
@@ -52,6 +53,7 @@ function Main({
           numberOfArticles={numberOfArticles}
           loggedIn={loggedIn}
           handleSaveNews={handleSaveNews}
+          handleDeleteNews={handleDeleteNews}
         />
       )}
       {loader && <Preloader />}

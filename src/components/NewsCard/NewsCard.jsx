@@ -54,7 +54,7 @@ function NewsCard({ card, mainTheme, loggedIn, handleSaveNews, handleDeleteNews 
           onMouseEnter={handleSaveClick}
           onMouseLeave={handleSaveClick}
           onClick={onClick}
-          // disabled={!loggedIn}
+          disabled={!loggedIn}
         ></button>
         <button
           type="button"

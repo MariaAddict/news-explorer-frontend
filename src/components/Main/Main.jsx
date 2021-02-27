@@ -22,6 +22,8 @@ function Main({
   loggedIn,
   signOut,
   handleSaveNews,
+  keyword,
+  isLocalStorageData
 }) {
   return (
     <main>
@@ -40,9 +42,9 @@ function Main({
           Находите самые свежие статьи на&nbsp;любую тему и&nbsp;сохраняйте
           в&nbsp;своём личном кабинете.
         </p>
-        <SearchForm onSubmit={submitSearchForm} errorApiNews={errorApiNews} />
+        <SearchForm onSubmit={submitSearchForm} errorApiNews={errorApiNews} keyword={keyword} isLocalStorageData={isLocalStorageData}  />
       </div>
-      {isNewsCardList && (
+      {(isNewsCardList || isLocalStorageData) && (
         <NewsCardList
           mainTheme={mainTheme}
           articles={articles}

@@ -1,24 +1,19 @@
 import "./SearchForm.css";
 import { useState, useCallback, useRef } from "react";
 
-function SearchForm({ onSubmit, errorApiNews }) {
+function SearchForm({ onSubmit, errorApiNews, keyword, isLocalStorageData }) {
   const [word, setWord] = useState("");
   const [errors, setErrors] = useState({});
   const [isValid, setIsValid] = useState(false);
   const inputRef = useRef();
 
   function handleChange(e) {
+    if (isLocalStorageData) {
+      setWord(keyword);
+    }
     setWord(e.target.value);
     setIsValid(e.target.closest(".seach-form").checkValidity());
   }
-
-  const resetFormWithoutWord = useCallback(
-    (newErrors = {}, newIsValid = false) => {
-      setErrors(newErrors);
-      setIsValid(newIsValid);
-    },
-    [setErrors, setIsValid]
-  );
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -30,7 +25,6 @@ function SearchForm({ onSubmit, errorApiNews }) {
     if (isValid) {
       onSubmit(word);
     }
-    // resetFormWithoutWord();
   }
 
   return (
@@ -44,7 +38,7 @@ function SearchForm({ onSubmit, errorApiNews }) {
       <input
         type="text"
         ref={inputRef}
-        value={word}
+        value={ word }
         name="search"
         className="seach-form__input"
         placeholder="Введите тему новости"

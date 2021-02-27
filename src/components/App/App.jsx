@@ -33,10 +33,12 @@ function App() {
     _id: "",
   });
   const [isSaveNewsCardList, setIsSaveNewsCardList] = useState(null);
+  const [keyword, setKeyword] = useState("");
+  const [isLocalStorageData, setIsLocalStorageData] = useState(false);
   const history = useHistory();
 
-  //check token
   useEffect(() => {
+    //check token
     const jwt = localStorage.getItem("jwt");
     apiMain
       .getContent(jwt)
@@ -48,13 +50,23 @@ function App() {
       .catch((err) => {
         console.log(err);
       });
+
+    //data search result
+    const searchWord = localStorage.getItem("search-word");
+    const searchArticles = JSON.parse(localStorage.getItem("articles"));
+    if (searchArticles == null) {
+      setIsLocalStorageData(false);
+    } else {
+      setKeyword(searchWord);
+      setIsLocalStorageData(true);
+      setArticles(searchArticles);
+    }
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
     if (loggedIn) {
-      localStorage.removeItem("articles");
-      localStorage.removeItem("search-word");
       Promise.all([apiMain.getUserData(), apiMain.getSaveArticles()])
         .then(([dataUser, dataSaveArticles]) => {
           setCurrentUser(dataUser);
@@ -91,7 +103,6 @@ function App() {
   }, [saveArticles]);
 
   useEffect(() => {
-    console.log(location.pathname);
     if (location.pathname === "/") {
       setMainTheme(true);
     }
@@ -118,6 +129,7 @@ function App() {
     setErrorApiNews(false);
     setIsNewsCardList(false);
     setIsNotFoundArticles(false);
+    setIsLocalStorageData(false);
     setLoader(true);
     setNumberOfArticles(3);
     apiNews
@@ -172,6 +184,9 @@ function App() {
           localStorage.setItem("jwt", user.token);
           setLoggedIn(true);
           setIsLoginModalOpen(false);
+          setIsLocalStorageData(false);
+          localStorage.removeItem("articles");
+          localStorage.removeItem("search-word");
         }
       })
       .catch((err) => {
@@ -183,6 +198,9 @@ function App() {
     localStorage.removeItem("jwt");
     setLoggedIn(false);
     history.push("/");
+    setIsLocalStorageData(false);
+    localStorage.removeItem("articles");
+    localStorage.removeItem("search-word");
   }
 
   function handleSaveNews(card) {
@@ -253,6 +271,8 @@ function App() {
               loggedIn={loggedIn}
               signOut={signOut}
               handleSaveNews={handleSaveNews}
+              keyword={keyword}
+              isLocalStorageData={isLocalStorageData}
             />
           </Route>
           <ProtectedRoute

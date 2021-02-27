@@ -12,7 +12,6 @@ function SavedNewsHeader({saveArticles}) {
       } else {
         prevVal[word] += 1;
       }
-      console.log('prevVal',prevVal)
       return prevVal;
     }, {}); 
 

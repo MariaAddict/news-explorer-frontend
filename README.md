@@ -17,14 +17,15 @@ _Проект представляет собой страницу с поиск
 9. Валидация полей формы 
 
 
-
 ### Технологии 
 Использованы технологии: 
 * _HTML5_ 
 * _CSS_ 
+* _JS_
 * _REACT_ 
 * API
 
+#### Сылки на проект и на его сервер:  
 [Посмотреть проект](http://mort-news-exp.students.nomoreparties.space/ "Добро пожаловать на news-explorer")
 
-[Доменное имя сервера](https://api.mort-news-exp.students.nomoreparties.space/ "Привет, сервак")  
+[Cервер](https://api.mort-news-exp.students.nomoreparties.space/ "Привет, сервак")  

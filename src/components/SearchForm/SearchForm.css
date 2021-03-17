@@ -28,10 +28,11 @@
 }
 
 .seach-form__input:focus {
-  outline-color: #2a65cc;
-  border: 1px solid #2a65cc;
+  outline-color: inherit;
   border-radius: 100px;
+  backdrop-filter: blur(8px);
   box-shadow: 1px 1px 1px 0 #2a65cc;
+  border: 3px solid #2a65cc;
 }
 
 .seach-form__button {
@@ -54,6 +55,21 @@
 
 .seach-form__button:active {
   background-color: #2a65cc;
+}
+
+.seach-form__error {
+  box-sizing: border-box;
+  display: block;
+}
+
+.seach-form__error_visible {
+  font-family: "Inter", "Arial", sans-serif;
+  font-size: 12px;
+  line-height: 15px;
+  text-align: start;
+  color: #ffffff;
+  align-self: center;
+  margin-left: 3px;
 }
 
 @media screen and (max-width: 960px) {

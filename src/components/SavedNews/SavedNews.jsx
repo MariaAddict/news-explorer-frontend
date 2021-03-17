@@ -3,15 +3,15 @@ import Header from "../Header/Header.jsx";
 import SavedNewsHeader from "../SavedNewsHeader/SavedNewsHeader.jsx";
 import NewsCardList from "../NewsCardList/NewsCardList.jsx";
 
-function SavedNews({mainTheme, onClickAuth}) {
+function SavedNews(props) {
   return (
     <section>
       <div className="save-news">
-        <Header mainTheme = {mainTheme} onClickAuth={onClickAuth} />
+        <Header mainTheme={props.mainTheme} onClickAuth={props.onClickAuth} loggedIn={props.loggedIn} signOut={props.signOut} />
         <hr className="main__line"></hr>
-        <SavedNewsHeader />
+        <SavedNewsHeader saveArticles={props.saveArticles} />
       </div>
-      <NewsCardList mainTheme = {mainTheme} />
+      <NewsCardList mainTheme = {props.mainTheme} articles={props.saveArticles} isSaveNewsCardList={props.isSaveNewsCardList} handleDeleteNews={props.handleDeleteNews} />
     </section>
   );
 }

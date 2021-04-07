@@ -5,7 +5,7 @@ const ProtectedRoute = ({ component: Component, ...props  }) => {
   return (
     <Route>
       {
-        () => props.loggedIn ? <Component {...props} /> : <Redirect to="./" />
+        () =>  localStorage.getItem("jwt") ? <Component {...props} /> : <Redirect to="./" />
       }
     </Route>
 )}

@@ -135,7 +135,6 @@ function App() {
     apiNews
       .getNews(word)
       .then((data) => {
-        console.log(data);
         if (data.totalResults === 0) {
           setIsNotFoundArticles(true);
         } else {
@@ -245,7 +244,6 @@ function App() {
           i === cardElement.index ? cardElement : c
         );
         setArticles(newCards);
-        console.log('articles in saved: ',articles);
         localStorage.setItem("articles", JSON.stringify(newCards));
       })
       .catch((err) => {
@@ -255,7 +253,6 @@ function App() {
 
   function handleDeleteNews(idArticles, card) {
     const word = localStorage.getItem("search-word");
-    console.log(idArticles, card);
     apiMain
       .deleteNews(idArticles)
       .then((data) => {

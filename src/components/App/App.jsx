@@ -140,10 +140,25 @@ function App() {
           setIsNotFoundArticles(true);
         } else {
           setIsNewsCardList(true);
-          setArticles(data.articles);
+          
+          if (loggedIn) {
+            const searchArticles = data.articles.map(el => {
+              const isSavedNews = saveArticles.some(item => {
+                return item.url === el.url;
+              });
+              if (isSavedNews) {
+                el.owner = currentUser._id;
+              }
+              return el;
+          });
+          setArticles(searchArticles);
+          localStorage.setItem("articles", JSON.stringify(searchArticles));
+        } else {
           localStorage.setItem("articles", JSON.stringify(data.articles));
-          localStorage.setItem("search-word", word);
+          setArticles(data.articles);
         }
+        }
+          localStorage.setItem("search-word", word);
       })
       .catch((err) => {
         console.log(err);

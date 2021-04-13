@@ -1,5 +1,5 @@
 import "./SearchForm.css";
-import { useState, useCallback, useRef } from "react";
+import { useState, useRef } from "react";
 
 function SearchForm({ onSubmit, errorApiNews, keyword, isLocalStorageData }) {
   const [word, setWord] = useState("");

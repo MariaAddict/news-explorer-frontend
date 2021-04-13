@@ -238,7 +238,7 @@ function App() {
           index: card.index,
         };
 
-        setSaveArticles([...saveArticles, cardElement]);
+        setSaveArticles([cardElement, ...saveArticles]);
 
         const newCards = articles.map((c, i) =>
           i === cardElement.index ? cardElement : c

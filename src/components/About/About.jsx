@@ -8,18 +8,20 @@ const About = () => {
         <img src={photo} alt="Фото автора" className="about__photo"></img>
       </div>
       <div className="about__info">
-          <h3 className="about__title">Об авторе</h3>
-          <p className="about__text">
-          Это блок с&nbsp;описанием автора проекта. Здесь следует указать, 
-          как вас зовут, чем вы&nbsp;занимаетесь, какими технологиями 
-          разработки владеете.<br></br>
-          Также можно рассказать о&nbsp;процессе обучения в&nbsp;Практикуме, 
-          чему вы&nbsp;тут научились, и&nbsp;чем можете помочь потенциальным 
-          заказчикам.
-          </p>
+        <h3 className="about__title">Об авторе</h3>
+        <p className="about__text">
+          Добро пожаловать! Меня зовут Каныгина Мария, я&nbsp;начинающий
+          frontend-разработчик. Продпочитаемый стек: React.js. Основные навыки:
+          HYML5, CSS3, JS, React.js, Node.js, Git, Express.js. Планирую изучать
+          TypeScript, Redux. <br></br> 
+          Я&nbsp;проходила обучение в&nbsp;Яндекс.Практикум,
+          получила основные знания по&nbsp;frontend-разработчике
+          и&nbsp;начальные знания по&nbsp;backend-разработке. Мне нравится
+          продумывать интерфейсы для пользователей.
+        </p>
       </div>
     </div>
   );
-}
+};
 
 export default About;

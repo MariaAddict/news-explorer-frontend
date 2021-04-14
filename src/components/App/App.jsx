@@ -70,12 +70,20 @@ function App() {
       Promise.all([apiMain.getUserData(), apiMain.getSaveArticles()])
         .then(([dataUser, dataSaveArticles]) => {
           setCurrentUser(dataUser);
-          const dataArticles = dataSaveArticles.map((card) => {
+          const sortDataArticles = dataSaveArticles.sort(function(previousItem, currentItem) {
+          const previousDate = new Date(previousItem.createdAt);
+          const currentDate = new Date(currentItem.createdAt);
+          if (previousDate < currentDate) return 1;
+          if (previousDate > currentDate) return -1;
+          return 0;
+          });
+          console.log("SORT ARR sortDataArticles", sortDataArticles);
+          const dataArticles = sortDataArticles.map((card) => {
             const newCard = {
               keyword: card.keyword,
               title: card.title,
               description: card.text,
-              publishedAt: card.data,
+              publishedAt: card.date,
               source: {
                 name: card.source,
               },
@@ -135,15 +143,29 @@ function App() {
     apiNews
       .getNews(word)
       .then((data) => {
-        console.log(data);
         if (data.totalResults === 0) {
           setIsNotFoundArticles(true);
         } else {
           setIsNewsCardList(true);
-          setArticles(data.articles);
+          
+          if (loggedIn) {
+            const searchArticles = data.articles.map(el => {
+              const isSavedNews = saveArticles.some(item => {
+                return item.url === el.url;
+              });
+              if (isSavedNews) {
+                el.owner = currentUser._id;
+              }
+              return el;
+          });
+          setArticles(searchArticles);
+          localStorage.setItem("articles", JSON.stringify(searchArticles));
+        } else {
           localStorage.setItem("articles", JSON.stringify(data.articles));
-          localStorage.setItem("search-word", word);
+          setArticles(data.articles);
         }
+        }
+          localStorage.setItem("search-word", word);
       })
       .catch((err) => {
         console.log(err);
@@ -205,7 +227,7 @@ function App() {
 
   function handleSaveNews(card) {
     const word = localStorage.getItem("search-word");
-
+    
     apiMain
       .saveNews(word, card)
       .then((newCard) => {
@@ -213,7 +235,7 @@ function App() {
           keyword: word,
           title: newCard.title,
           description: newCard.text,
-          publishedAt: newCard.data,
+          publishedAt: newCard.date,
           source: {
             name: newCard.source,
           },
@@ -224,13 +246,12 @@ function App() {
           index: card.index,
         };
 
-        setSaveArticles([...saveArticles, cardElement]);
-
+        setSaveArticles([cardElement, ...saveArticles]);
+        
         const newCards = articles.map((c, i) =>
           i === cardElement.index ? cardElement : c
         );
         setArticles(newCards);
-        console.log('articles in saved: ',articles);
         localStorage.setItem("articles", JSON.stringify(newCards));
       })
       .catch((err) => {
@@ -240,7 +261,6 @@ function App() {
 
   function handleDeleteNews(idArticles, card) {
     const word = localStorage.getItem("search-word");
-    console.log(idArticles, card);
     apiMain
       .deleteNews(idArticles)
       .then((data) => {

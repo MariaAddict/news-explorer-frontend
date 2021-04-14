@@ -26,7 +26,7 @@ function NewsCard({ card, mainTheme, loggedIn, handleSaveNews, handleDeleteNews 
 
   function onClick() {
     if (mainTheme && loggedIn && !isSaved) {
-      handleSaveNews(card, isSaved);
+      handleSaveNews(card);
     }
     if (mainTheme === isSaved) {
       handleDeleteNews(card._id, card);

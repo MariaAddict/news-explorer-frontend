@@ -70,12 +70,20 @@ function App() {
       Promise.all([apiMain.getUserData(), apiMain.getSaveArticles()])
         .then(([dataUser, dataSaveArticles]) => {
           setCurrentUser(dataUser);
-          const dataArticles = dataSaveArticles.map((card) => {
+          const sortDataArticles = dataSaveArticles.sort(function(previousItem, currentItem) {
+          const previousDate = new Date(previousItem.createdAt);
+          const currentDate = new Date(currentItem.createdAt);
+          if (previousDate < currentDate) return 1;
+          if (previousDate > currentDate) return -1;
+          return 0;
+          });
+          console.log("SORT ARR sortDataArticles", sortDataArticles);
+          const dataArticles = sortDataArticles.map((card) => {
             const newCard = {
               keyword: card.keyword,
               title: card.title,
               description: card.text,
-              publishedAt: card.data,
+              publishedAt: card.date,
               source: {
                 name: card.source,
               },
@@ -219,7 +227,7 @@ function App() {
 
   function handleSaveNews(card) {
     const word = localStorage.getItem("search-word");
-
+    
     apiMain
       .saveNews(word, card)
       .then((newCard) => {
@@ -227,7 +235,7 @@ function App() {
           keyword: word,
           title: newCard.title,
           description: newCard.text,
-          publishedAt: newCard.data,
+          publishedAt: newCard.date,
           source: {
             name: newCard.source,
           },
@@ -239,7 +247,7 @@ function App() {
         };
 
         setSaveArticles([cardElement, ...saveArticles]);
-
+        
         const newCards = articles.map((c, i) =>
           i === cardElement.index ? cardElement : c
         );

@@ -25,7 +25,7 @@ _Проект представляет собой страницу с поиск
 * _REACT_ 
 * API
 
-#### Сылки на проект и на его сервер:  
-[Посмотреть проект](http://mort-news-exp.students.nomoreparties.space/ "Добро пожаловать на news-explorer")
+#### Сcылки на проект и на его сервер:  
+[Посмотреть проект](https://news.mortany.ru/ "Добро пожаловать на news-explorer")
 
-[Cервер](https://api.mort-news-exp.students.nomoreparties.space/ "Привет, сервак")  
+[Cервер](https://api.news.mortany.ru/ "Привет, сервак")  

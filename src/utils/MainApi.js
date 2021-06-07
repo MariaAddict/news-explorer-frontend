@@ -1,4 +1,4 @@
-const BASE_URL = "https://api.mort-news-exp.students.nomoreparties.space/";
+const BASE_URL = "https://api.news.mortany.ru/";
 
 const handleResponse = res => {
     if (res.ok) {

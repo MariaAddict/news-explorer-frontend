@@ -129,6 +129,12 @@
   background-image: url(../../images/save-button-marked.png);
 }
 
+.cards__button-save_marked:hover {
+  opacity: 0.8;
+  background-image: url(../../images/save-button-marked.png);
+  transition: opacity 0.5s ease, background-image 0.5s ease;
+}
+
 .cards__keyword {
   border-radius: 10px;
   position: absolute;

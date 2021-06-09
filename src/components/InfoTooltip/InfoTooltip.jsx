@@ -1,5 +1,10 @@
 import "../PopupWithForm/PopupWithForm.css"
-function InfoTooltip({isOpen, onClose, handleLoginClick}) {
+function InfoTooltip({isOpen, onClose, openLoginModal}) {
+
+    function handleLoginClick() {
+        onClose();
+        openLoginModal();
+    }
 
     return (
         <div className={`modal modal_type_info-tooltip ${isOpen ? ('modal_opened') : ('')}`}>
